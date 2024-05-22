@@ -151,10 +151,6 @@ class Media3PlayerAdapter(context: Context) : PlayerAdapter() {
 
     }
 
-    fun playWhenPrepared() {
-        exoPlayer.playWhenReady = true
-    }
-
     internal inner class VideoPlayerSurfaceHolderCallback : SurfaceHolder.Callback {
         override fun surfaceCreated(surfaceHolder: SurfaceHolder) {
             setDisplay(surfaceHolder)

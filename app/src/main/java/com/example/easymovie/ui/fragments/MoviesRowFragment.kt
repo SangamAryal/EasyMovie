@@ -112,11 +112,13 @@ class MoviesRowFragment : RowsSupportFragment(), MainFragmentAdapterProvider {
                 val intent = Intent(activity!!, DetailsActivity::class.java)
                 intent.putExtra(DetailsActivity.MOVIE, item as Serializable)
 
-                val bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    activity!!,
-                    (itemViewHolder.view as ImageCardView).mainImageView,
-                    DetailsActivity.SHARED_ELEMENT_NAME
-                ).toBundle()
+                val bundle = (itemViewHolder.view as ImageCardView).mainImageView?.let {
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        activity!!,
+                        it,
+                        DetailsActivity.SHARED_ELEMENT_NAME
+                    ).toBundle()
+                }
                 startActivity(intent, bundle)
             } else if (item is String) {
 //                if (item.contains(getString(R.string.error_fragment))) {

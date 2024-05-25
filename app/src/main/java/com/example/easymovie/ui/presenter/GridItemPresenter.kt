@@ -43,7 +43,7 @@ class GridItemPresenter : Presenter() {
         return Presenter.ViewHolder(cardView)
     }
 
-    override fun onBindViewHolder(viewHolder: Presenter.ViewHolder, item: Any) {
+    override fun onBindViewHolder(viewHolder: ViewHolder, item: Any?) {
         val movie = item as Result
         val cardView = viewHolder.view as ImageCardView
         val url = IMAGE_BASE_URL + movie.poster_path
@@ -52,11 +52,13 @@ class GridItemPresenter : Presenter() {
         cardView.titleText = movie.title
         cardView.contentText = movie.overview
         cardView.setMainImageDimensions(CARD_WIDTH, CARD_HEIGHT)
-        Glide.with(viewHolder.view.context)
-            .load(url)
-            .centerCrop()
-            .error(mDefaultCardImage)
-            .into(cardView.mainImageView)
+        cardView.mainImageView?.let {
+            Glide.with(viewHolder.view.context)
+                .load(url)
+                .centerCrop()
+                .error(mDefaultCardImage)
+                .into(it)
+        }
         Log.d(TAG, "Card bound with movie: ${movie.title}")
     }
 

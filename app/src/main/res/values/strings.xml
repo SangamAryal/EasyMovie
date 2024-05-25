@@ -17,4 +17,69 @@
     <string name="error_fragment_message">An error occurred</string>
     <string name="dismiss_error">Dismiss</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_results">Search results for \'%1$s\'</string>
+    <string name="no_search_results">No search results found for \'%1$s\'</string>
+
+
+    <!-- Category Titles -->
+    <string name="basic_preferences">Basic Preferences</string>
+    <string name="widgets">Widgets</string>
+    <string name="dialogs">Dialogs</string>
+    <string name="advanced_attributes">Advanced Attributes</string>
+
+    <!-- Basic Preferences -->
+    <string name="title_basic_preference">Basic Preference</string>
+    <string name="summary_basic_preference">This is a basic preference.</string>
+    <string name="title_stylish_preference">Stylish Preference</string>
+    <string name="summary_stylish_preference">This is a stylish preference.</string>
+    <string name="title_icon_preference">Icon Preference</string>
+    <string name="summary_icon_preference">This is an icon preference.</string>
+    <string name="title_single_line_title_preference">Single Line Title Preference</string>
+    <string name="summary_single_line_title_preference">This preference has a single line title.</string>
+
+    <!-- Widgets -->
+    <string name="title_checkbox_preference">Checkbox Preference</string>
+    <string name="summary_checkbox_preference">This is a checkbox preference.</string>
+    <string name="title_switch_preference">Switch Preference</string>
+    <string name="summary_switch_preference">This is a switch preference.</string>
+    <string name="title_dropdown_preference">Dropdown Preference</string>
+    <string name="title_seekbar_preference">SeekBar Preference</string>
+
+    <!-- Dialogs -->
+    <string name="title_edittext_preference">EditText Preference</string>
+    <string name="dialog_title_edittext_preference">Edit your text here</string>
+    <string name="title_list_preference">List Preference</string>
+    <string name="dialog_title_list_preference">Select an option</string>
+    <string name="title_multi_list_preference">Multi-Select List Preference</string>
+    <string name="summary_multi_list_preference">This is a multi-select list preference.</string>
+    <string name="dialog_title_multi_list_preference">Select options</string>
+
+    <!-- Advanced Attributes -->
+    <string name="title_expandable_preference">Expandable Preference</string>
+    <string name="summary_expandable_preference">This is an expandable preference.</string>
+    <string name="title_intent_preference">Intent Preference</string>
+    <string name="summary_intent_preference">This preference opens an intent.</string>
+    <string name="title_parent_preference">Parent Preference</string>
+    <string name="summary_parent_preference">This is a parent preference.</string>
+    <string name="title_child_preference">Child Preference</string>
+    <string name="summary_child_preference">This is a child preference dependent on parent.</string>
+    <string name="title_toggle_summary_preference">Toggle Summary Preference</string>
+    <string name="summary_on_toggle_summary_preference">This preference is ON.</string>
+    <string name="summary_off_toggle_summary_preference">This preference is OFF.</string>
+    <string name="title_copyable_preference">Copyable Preference</string>
+    <string name="summary_copyable_preference">This is a copyable preference.</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 </resources>

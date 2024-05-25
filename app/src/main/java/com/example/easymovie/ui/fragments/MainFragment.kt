@@ -1,8 +1,8 @@
 
 package com.example.easymovie.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.leanback.app.BrowseSupportFragment
 import androidx.leanback.widget.ArrayObjectAdapter
@@ -10,7 +10,9 @@ import androidx.leanback.widget.HeaderItem
 import androidx.leanback.widget.ListRowPresenter
 import androidx.leanback.widget.PageRow
 import com.example.easymovie.R
+import com.example.easymovie.ui.activity.SearchActivity
 import com.example.easymovie.ui.page.PageRowFragmentFactory
+
 
 class MainFragment : BrowseSupportFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -55,9 +57,8 @@ class MainFragment : BrowseSupportFragment() {
 
     private fun setupEventListeners() {
         setOnSearchClickedListener {
-            Toast.makeText(requireActivity(), "Search is yet to be implemented", Toast.LENGTH_LONG)
-                .show()
+            val intent = Intent(activity, SearchActivity::class.java)
+            startActivity(intent)
         }
     }
-
 }

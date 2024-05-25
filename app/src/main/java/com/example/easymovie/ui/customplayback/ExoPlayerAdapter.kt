@@ -26,7 +26,7 @@ class Media3PlayerAdapter(context: Context) : PlayerAdapter() {
     private val mUpdatePositionRunnable = object : Runnable {
         override fun run() {
             if (mInitialized && isPlaying()) {
-                callback.onCurrentPositionChanged(this@Media3PlayerAdapter)
+                callback?.onCurrentPositionChanged(this@Media3PlayerAdapter)
                 mHandler.postDelayed(this, getUpdatePeriod())
             }
         }
@@ -45,20 +45,20 @@ class Media3PlayerAdapter(context: Context) : PlayerAdapter() {
                 if (playbackState == ExoPlayer.STATE_READY && !mInitialized) {
                     mInitialized = true;
                     if (mSurfaceHolderGlueHost == null || mHasDisplay) {
-                        callback.onPreparedStateChanged(this@Media3PlayerAdapter);
+                        callback?.onPreparedStateChanged(this@Media3PlayerAdapter);
                     }
                 } else if (playbackState == ExoPlayer.STATE_BUFFERING) {
                     mBufferingStart = true;
                 } else if (playbackState == ExoPlayer.STATE_ENDED) {
-                    callback.onPlayStateChanged(this@Media3PlayerAdapter);
-                    callback.onPlayCompleted(this@Media3PlayerAdapter);
+                    callback?.onPlayStateChanged(this@Media3PlayerAdapter);
+                    callback?.onPlayCompleted(this@Media3PlayerAdapter);
                 }
                 notifyBufferStartEnd()
             }
 
             override fun onIsPlayingChanged(isPlaying: Boolean) {
                 Log.d("Media33PlayerAdapter", "Is playing changed: $isPlaying")
-                callback.onPlayStateChanged(this@Media3PlayerAdapter)
+                callback?.onPlayStateChanged(this@Media3PlayerAdapter)
             }
         })
     }
@@ -66,7 +66,7 @@ class Media3PlayerAdapter(context: Context) : PlayerAdapter() {
 
 
     private fun notifyBufferStartEnd() {
-        callback.onBufferingStateChanged(this@Media3PlayerAdapter,
+        callback?.onBufferingStateChanged(this@Media3PlayerAdapter,
             mBufferingStart || !mInitialized);
     }
     private fun getUpdatePeriod(): Long {
@@ -81,7 +81,7 @@ class Media3PlayerAdapter(context: Context) : PlayerAdapter() {
     }
 
 
-    override fun onAttachedToHost(host: PlaybackGlueHost?) {
+    override fun onAttachedToHost(host: PlaybackGlueHost) {
         if (host is SurfaceHolderGlueHost) {
             mSurfaceHolderGlueHost = host
             mSurfaceHolderGlueHost!!.setSurfaceHolderCallback(VideoPlayerSurfaceHolderCallback())
@@ -107,15 +107,15 @@ class Media3PlayerAdapter(context: Context) : PlayerAdapter() {
             return
         }
         exoPlayer.playWhenReady = true
-        callback.onPlayStateChanged(this@Media3PlayerAdapter)
-        callback.onCurrentPositionChanged(this@Media3PlayerAdapter)
+        callback?.onPlayStateChanged(this@Media3PlayerAdapter)
+        callback?.onCurrentPositionChanged(this@Media3PlayerAdapter)
     }
 
     override fun pause() {
         Log.d("Media33PlayerAdapter", "Pause called")
         if (isPlaying()) {
             exoPlayer.playWhenReady = false
-            callback.onPlayStateChanged(this@Media3PlayerAdapter)
+            callback?.onPlayStateChanged(this@Media3PlayerAdapter)
         }
 
     }
@@ -171,11 +171,11 @@ class Media3PlayerAdapter(context: Context) : PlayerAdapter() {
         exoPlayer.setVideoSurfaceHolder(surfaceHolder)
         if (mHasDisplay) {
             if (mInitialized) {
-                callback.onPreparedStateChanged(this)
+                callback?.onPreparedStateChanged(this)
             }
         } else {
             if (mInitialized) {
-                callback.onPreparedStateChanged(this)
+                callback?.onPreparedStateChanged(this)
             }
         }
     }

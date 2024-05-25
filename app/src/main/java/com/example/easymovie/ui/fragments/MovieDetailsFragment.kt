@@ -74,9 +74,11 @@ class MovieDetailsFragment : DetailsSupportFragment() {
 
     private fun setupDetailsOverviewRow() {
         Log.d(TAG, "doInBackground: " + mSelectedMovie?.toString())
-        val row = DetailsOverviewRow(mSelectedMovie)
-        row.imageDrawable =
-            ContextCompat.getDrawable(requireActivity(), R.drawable.default_background)
+        val row = mSelectedMovie?.let { DetailsOverviewRow(it) }
+        if (row != null) {
+            row.imageDrawable =
+                ContextCompat.getDrawable(requireActivity(), R.drawable.default_background)
+        }
         val width = convertDpToPixel(requireActivity(), DETAIL_THUMB_WIDTH)
         val height = convertDpToPixel(requireActivity(), DETAIL_THUMB_HEIGHT)
         val uri = IMAGE_BASE_URL + mSelectedMovie?.poster_path
@@ -86,7 +88,9 @@ class MovieDetailsFragment : DetailsSupportFragment() {
                     drawable: Drawable, transition: Transition<in Drawable>?
                 ) {
                     Log.d(TAG, "details overview card image url ready: $drawable")
-                    row.imageDrawable = drawable
+                    if (row != null) {
+                        row.imageDrawable = drawable
+                    }
                     mAdapter.notifyArrayItemRangeChanged(0, mAdapter.size())
                 }
             })
@@ -112,9 +116,13 @@ class MovieDetailsFragment : DetailsSupportFragment() {
 //                ACTION_BUY, resources.getString(R.string.buy_1), resources.getString(R.string.buy_2)
 //            )
 //        )
-        row.actionsAdapter = actionAdapter
+        if (row != null) {
+            row.actionsAdapter = actionAdapter
+        }
 
-        mAdapter.add(row)
+        if (row != null) {
+            mAdapter.add(row)
+        }
     }
 
     private fun setupDetailsOverviewRowPresenter() {

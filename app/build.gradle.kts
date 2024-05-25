@@ -35,21 +35,25 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.constraintlayout.v220alpha13)
     implementation(libs.androidx.leanback.v100)
     implementation(libs.glide)
     implementation(libs.gson)
     implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx.v262)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
-    implementation("androidx.media3:media3-exoplayer:1.3.1")
-    implementation("androidx.media3:media3-exoplayer-dash:1.3.1")
-    implementation("androidx.media3:media3-ui:1.3.1")
-    implementation("com.squareup.okhttp3:logging-interceptor:3.11.0")
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.exoplayer.dash)
+    implementation(libs.androidx.media3.ui)
+    implementation(libs.logging.interceptor)
+    implementation(libs.androidx.leanback.preference.v120alpha04)
+    implementation(libs.androidx.preference)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.loader)
+
 }

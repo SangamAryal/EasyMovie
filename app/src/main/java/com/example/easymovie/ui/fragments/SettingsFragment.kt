@@ -1,68 +1,81 @@
 package com.example.easymovie.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.leanback.app.BrowseSupportFragment
 import androidx.leanback.app.RowsSupportFragment
-import androidx.leanback.widget.ArrayObjectAdapter
-import androidx.leanback.widget.HeaderItem
-import androidx.leanback.widget.ListRow
-import androidx.leanback.widget.ListRowPresenter
-import androidx.lifecycle.ViewModelProvider
-import com.example.easymovie.application.MyApplication
-import com.example.easymovie.data.api.Response
-import com.example.easymovie.data.model.MovieList.Result
-import com.example.easymovie.ui.presenter.CardPresenter
-import com.example.easymovie.viewmodels.MovieListViewModelFactory
-import com.example.easymovie.viewmodels.MoviesListViewModel
+import androidx.leanback.widget.*
+import com.example.easymovie.R
+import com.example.easymovie.data.model.Card
+import com.example.easymovie.data.model.CardRow
+import com.example.easymovie.ui.activity.SettingsActivity
+import com.example.easymovie.ui.presenter.SettingIconPresenter
+import com.google.gson.Gson
 
-class SettingsFragment : RowsSupportFragment() {
-    private val repository by lazy { (requireActivity().application as MyApplication).moviesRepository }
-    private lateinit var mainViewModel: MoviesListViewModel
-    private lateinit var rowsAdapter: ArrayObjectAdapter
+class SettingsFragment : RowsSupportFragment(), BrowseSupportFragment.MainFragmentAdapterProvider {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        rowsAdapter = ArrayObjectAdapter(ListRowPresenter())
-        adapter = rowsAdapter
+    private val mRowsAdapter: ArrayObjectAdapter
 
+    init {
+        val listRowPresenter = ListRowPresenter().apply {
+            setNumRows(2)
+        }
+        mRowsAdapter = ArrayObjectAdapter(listRowPresenter)
+        adapter = mRowsAdapter
+    }
+
+    override fun getMainFragmentAdapter(): BrowseSupportFragment.MainFragmentAdapter<*> {
+        return BrowseSupportFragment.MainFragmentAdapter(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainViewModel = ViewModelProvider(
-            this, MovieListViewModelFactory(repository)
-        )[MoviesListViewModel::class.java]
+        view.setPadding(5, 100, 5, 0)
+        setupEventListeners()
+        loadData()
+    }
 
-        mainViewModel.moviesList.observe(viewLifecycleOwner) { result ->
-            if (result is Response.Success) {
-                val movieList = result.data?.results ?: emptyList()
-                loadRows(movieList)
-            } else if (result is Response.Error) {
-                loadRows(emptyList())
-                Log.e("MainFragment", "Error fetching movies: ${result.error}")
+    private fun setupEventListeners() {
+        onItemViewClickedListener = ItemViewClickedListener()
+    }
+
+    private fun loadData() {
+        if (isAdded) {
+            val json = readJsonFile(R.raw.icon_example)
+            val cardRow = Gson().fromJson(json, CardRow::class.java)
+            mRowsAdapter.add(createCardRow(cardRow))
+        }
+    }
+
+    private fun createCardRow(cardRow: CardRow): ListRow {
+        val iconCardPresenter = SettingIconPresenter()
+        val adapter = ArrayObjectAdapter(iconCardPresenter)
+
+        cardRow.cards.forEach { card ->
+            adapter.add(card)
+        }
+
+        // No header item provided
+        return ListRow(adapter)
+    }
+
+    private fun readJsonFile(resourceId: Int): String {
+        val inputStream = resources.openRawResource(resourceId)
+        return inputStream.bufferedReader().use { it.readText() }
+    }
+
+    private inner class ItemViewClickedListener : OnItemViewClickedListener {
+        override fun onItemClicked(
+            itemViewHolder: Presenter.ViewHolder?,
+            item: Any?,
+            rowViewHolder: RowPresenter.ViewHolder?,
+            row: Row?
+        ) {
+            if (item is Card && item.title == "Settings") {
+                val intent = Intent(activity, SettingsActivity::class.java)
+                startActivity(intent)
             }
         }
     }
-
-
-    private fun loadRows(movieList: List<Result>?) {
-        if (movieList == null) {
-            Log.e("MoviesFragment", "Movie list is empty, no rows to load.")
-            return
-        }
-
-        val cardPresenter = CardPresenter()
-        val listRowAdapter = ArrayObjectAdapter(cardPresenter)
-        for (movie in movieList) {
-            listRowAdapter.add(movie)
-        }
-
-        val header = HeaderItem(0, "Movies")
-        rowsAdapter.add(ListRow(header, listRowAdapter))
-    }
-
-    companion object {
-    }
-
 }

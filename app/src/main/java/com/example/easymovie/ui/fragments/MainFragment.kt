@@ -1,4 +1,3 @@
-
 package com.example.easymovie.ui.fragments
 
 import android.content.Intent
@@ -26,6 +25,8 @@ class MainFragment : BrowseSupportFragment() {
         setupEventListeners()
     }
 
+
+
     private fun setupUIElements() {
         title = getString(R.string.browse_title)
         headersState = HEADERS_ENABLED
@@ -33,6 +34,8 @@ class MainFragment : BrowseSupportFragment() {
         brandColor = ContextCompat.getColor(requireActivity(), R.color.fastlane_background)
         searchAffordanceColor = ContextCompat.getColor(requireActivity(), R.color.search_opaque)
     }
+
+
 
     private fun setupPageRows() {
         val rowsAdapter = ArrayObjectAdapter(ListRowPresenter())
@@ -50,10 +53,9 @@ class MainFragment : BrowseSupportFragment() {
         rowsAdapter.add(pageRow3)
 
         adapter = rowsAdapter
-
-        // Set the fragment factory with the fetched movie list
-
     }
+    // Set the fragment factory with the fetched movie list
+
 
     private fun setupEventListeners() {
         setOnSearchClickedListener {

@@ -1,6 +1,6 @@
 package com.example.easymovie.data.api
 
-import com.example.easymovie.data.model.MovieList.MovieList
+import com.example.easymovie.data.model.movielist.MovieList
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

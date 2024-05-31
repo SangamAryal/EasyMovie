@@ -11,7 +11,6 @@ import androidx.preference.PreferenceDialogFragmentCompat
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceScreen
 import com.example.easymovie.R
-import java.util.Stack
 
 
 class SettingsShowFragment : LeanbackSettingsFragmentCompat() {

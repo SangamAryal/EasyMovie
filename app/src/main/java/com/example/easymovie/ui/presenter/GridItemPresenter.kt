@@ -2,15 +2,17 @@ package com.example.easymovie.ui.presenter
 
 import android.graphics.drawable.Drawable
 import android.util.Log
+import android.view.ContextThemeWrapper
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.leanback.widget.ImageCardView
 import androidx.leanback.widget.Presenter
 import com.bumptech.glide.Glide
 import com.example.easymovie.R
-import com.example.easymovie.data.model.MovieList.Result
+import com.example.easymovie.data.model.movielist.Result
 import com.example.easymovie.utils.Constants.IMAGE_BASE_URL
 import kotlin.properties.Delegates
+
 
 class GridItemPresenter : Presenter() {
     private var mDefaultCardImage: Drawable? = null
@@ -24,7 +26,12 @@ class GridItemPresenter : Presenter() {
         sSelectedBackgroundColor = ContextCompat.getColor(parent.context, R.color.selected_background)
         mDefaultCardImage = ContextCompat.getDrawable(parent.context, R.drawable.movie)
 
-        val cardView = object : ImageCardView(parent.context) {
+        val cardView = object : ImageCardView(
+            ContextThemeWrapper(
+                parent.context,
+                R.style.CustomImageCardTheme
+            )
+        ) {
             override fun setSelected(selected: Boolean) {
                 super.setSelected(selected)
                 updateCardBackgroundColor(this, selected)
@@ -75,7 +82,7 @@ class GridItemPresenter : Presenter() {
         // Both background colors should be set because the view's background is temporarily visible
         // during animations.
         view.setBackgroundColor(color)
-        view.setInfoAreaBackgroundColor(color)
+//        view.setInfoAreaBackgroundColor(color)
         Log.d(TAG, "Card background color updated to: ${if (selected) "selected" else "default"}")
     }
 

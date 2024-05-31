@@ -5,7 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.easymovie.data.api.ApiService
 import com.example.easymovie.data.api.Response
-import com.example.easymovie.data.model.MovieList.MovieList
+import com.example.easymovie.data.model.movielist.MovieList
+import com.example.easymovie.data.model.movielist.Result
 import com.example.easymovie.utils.Constants.API_KEY
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -13,12 +14,12 @@ import kotlinx.coroutines.withContext
 class MoviesRepository(private val service: ApiService) {
 
     private val moviesData = MutableLiveData<Response<MovieList>>()
-    private val searchData = MutableLiveData<List<com.example.easymovie.data.model.MovieList.Result>>()
+    private val searchData = MutableLiveData<List<Result>>()
 
     val movies: LiveData<Response<MovieList>>
         get() = moviesData
 
-    val searchResults: LiveData<List<com.example.easymovie.data.model.MovieList.Result>>
+    val searchResults: LiveData<List<Result>>
         get() = searchData
 
     suspend fun getMovieList() {
@@ -28,7 +29,8 @@ class MoviesRepository(private val service: ApiService) {
                 if (result.isSuccessful && result.body() != null) {
                     Log.d("MoviesRepository", "API call successful: ${result.isSuccessful}")
                     moviesData.postValue(Response.Success(result.body()))
-                } else {
+                }
+                else {
                     Log.e("MoviesRepository", "Error: ${result.errorBody()?.string()}")
                     moviesData.postValue(Response.Error(result.errorBody().toString()))
                 }

@@ -1,13 +1,14 @@
 package com.example.easymovie.ui.activity
 
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentActivity
 import com.example.easymovie.R
-import com.example.easymovie.application.MyApplication
 import com.example.easymovie.ui.fragments.MainFragment
+import com.example.easymovie.ui.fragments.MoviesRowFragment
 
 class MainActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +26,8 @@ class MainActivity : FragmentActivity() {
                 .replace(R.id.main_browse_fragment, MainFragment()).commitNow()
         }
 
-
     }
+
+
+
 }

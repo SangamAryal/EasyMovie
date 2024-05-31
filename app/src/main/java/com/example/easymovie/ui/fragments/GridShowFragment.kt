@@ -10,7 +10,7 @@ import androidx.leanback.widget.ArrayObjectAdapter
 import androidx.leanback.widget.VerticalGridPresenter
 import com.example.easymovie.application.MyApplication
 import com.example.easymovie.data.api.Response
-import com.example.easymovie.data.model.MovieList.Result
+import com.example.easymovie.data.model.movielist.Result
 import com.example.easymovie.ui.presenter.GridItemPresenter
 import com.example.easymovie.viewmodels.MovieListViewModelFactory
 import com.example.easymovie.viewmodels.MoviesListViewModel
@@ -37,7 +37,6 @@ class GridShowFragment : VerticalGridSupportFragment(), BrowseSupportFragment.Ma
         mAdapter = ArrayObjectAdapter(GridItemPresenter())
         adapter = mAdapter
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.setPadding(0, 50, 0, 0)
@@ -51,7 +50,7 @@ class GridShowFragment : VerticalGridSupportFragment(), BrowseSupportFragment.Ma
                 is Response.Success -> loadGridItems(result.data?.results ?: emptyList())
                 is Response.Error -> {
                     loadGridItems(emptyList())
-                    Log.e("AccountFragment", "Error fetching movies: ${result.error}")
+                    Log.e("GridFragment", "Error fetching movies: ${result.error}")
                 }
 
                 is Response.Loading -> TODO()

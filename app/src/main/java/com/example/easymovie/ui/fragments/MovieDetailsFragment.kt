@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.leanback.app.DetailsSupportFragment
@@ -21,7 +22,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.easymovie.R
-import com.example.easymovie.data.model.MovieList.Result
+import com.example.easymovie.data.model.movielist.Result
+import com.example.easymovie.interfaces.OnFragmentKeyListener
 import com.example.easymovie.ui.activity.DetailsActivity
 import com.example.easymovie.ui.activity.MainActivity
 import com.example.easymovie.ui.activity.PlaybackActivity
@@ -56,6 +58,21 @@ class MovieDetailsFragment : DetailsSupportFragment() {
         }
 
 
+    }
+
+    fun handleKeyEvent(keyCode: Int, event: KeyEvent): Boolean {
+        // Handle the key event here
+        if (event.action == KeyEvent.ACTION_DOWN) {
+            when (keyCode) {
+                KeyEvent.KEYCODE_DPAD_UP -> {
+                    // Simulate a DPAD DOWN key event
+                    val newEvent = KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_DOWN)
+                    requireActivity().onKeyDown(newEvent.keyCode, newEvent)
+                    return true
+                }
+            }
+        }
+        return false
     }
 
     private fun initializeBackground(movie: Result?) {
@@ -144,8 +161,7 @@ class MovieDetailsFragment : DetailsSupportFragment() {
                 val intent = Intent(requireActivity(), PlaybackActivity::class.java)
                 intent.putExtra(DetailsActivity.MOVIE, mSelectedMovie)
                 startActivity(intent)
-            }
-            else{
+            } else {
                 Toast.makeText(activity, "Yet to be Implemented", Toast.LENGTH_SHORT).show()
             }
         }
@@ -159,11 +175,26 @@ class MovieDetailsFragment : DetailsSupportFragment() {
     }
 
     companion object {
-        private val TAG = "MovieDetailsFragments"
-        private val ACTION_WATCH_MOVIE = 1L
-        private val DETAIL_THUMB_WIDTH = 274
-        private val DETAIL_THUMB_HEIGHT = 274
+        private const val TAG = "MovieDetailsFragments"
+        private const val ACTION_WATCH_MOVIE = 1L
+        private const val DETAIL_THUMB_WIDTH = 274
+        private const val DETAIL_THUMB_HEIGHT = 274
 
     }
+
+//    override fun onKeyEvent(keyCode: Int, event: KeyEvent): Boolean {
+//        if (event.action == KeyEvent.ACTION_DOWN) {
+//            when (event.keyCode) {
+//                KeyEvent.KEYCODE_DPAD_UP -> {
+//                    // Simulate a D-pad down key press
+//                    val downEvent = KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_DOWN)
+//                    requireActivity().onKeyDown(downEvent.keyCode, downEvent)
+//                    return true
+//                }
+//            }
+//        }
+//        return false
+//
+//    }
 
 }

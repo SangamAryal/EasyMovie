@@ -1,3 +1,4 @@
+
 package com.example.easymovie.ui.fragments
 
 import android.content.Intent
@@ -20,7 +21,7 @@ import androidx.leanback.widget.RowPresenter
 import androidx.lifecycle.ViewModelProvider
 import com.example.easymovie.R
 import com.example.easymovie.application.MyApplication
-import com.example.easymovie.data.model.MovieList.Result
+import com.example.easymovie.data.model.movielist.Result
 import com.example.easymovie.ui.activity.DetailsActivity
 import com.example.easymovie.ui.presenter.CardPresenter
 import com.example.easymovie.viewmodels.MovieListViewModelFactory

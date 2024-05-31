@@ -4,13 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.leanback.app.BrowseSupportFragment
 import androidx.leanback.app.BrowseSupportFragment.MainFragmentAdapterProvider
 import androidx.leanback.app.RowsSupportFragment
 import androidx.leanback.widget.ArrayObjectAdapter
 import androidx.leanback.widget.HeaderItem
-import androidx.leanback.widget.ImageCardView
 import androidx.leanback.widget.ListRow
 import androidx.leanback.widget.ListRowPresenter
 import androidx.leanback.widget.OnItemViewClickedListener
@@ -20,7 +20,7 @@ import androidx.leanback.widget.RowPresenter
 import androidx.lifecycle.ViewModelProvider
 import com.example.easymovie.application.MyApplication
 import com.example.easymovie.data.api.Response
-import com.example.easymovie.data.model.MovieList.Result
+import com.example.easymovie.data.model.movielist.Result
 import com.example.easymovie.ui.activity.DetailsActivity
 import com.example.easymovie.ui.presenter.CardPresenter
 import com.example.easymovie.viewmodels.MovieListViewModelFactory
@@ -62,6 +62,11 @@ class MoviesRowFragment : RowsSupportFragment(), MainFragmentAdapterProvider {
         }
         setupEventListeners()
 
+
+    }
+
+    private fun handleDpadDown() {
+        view?.focusSearch(View.FOCUS_DOWN)?.requestFocus()
     }
 
     private fun loadRows(movieList: List<Result>?) {
@@ -111,12 +116,9 @@ class MoviesRowFragment : RowsSupportFragment(), MainFragmentAdapterProvider {
                 Log.d("ItemClicked", "Item: $item")
                 val intent = Intent(activity!!, DetailsActivity::class.java)
                 intent.putExtra(DetailsActivity.MOVIE, item as Serializable)
-
-                val bundle = (itemViewHolder.view as ImageCardView).mainImageView?.let {
+                val bundle = (itemViewHolder.view as? ImageView)?.let {
                     ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        activity!!,
-                        it,
-                        DetailsActivity.SHARED_ELEMENT_NAME
+                        activity!!, it, DetailsActivity.SHARED_ELEMENT_NAME
                     ).toBundle()
                 }
                 startActivity(intent, bundle)

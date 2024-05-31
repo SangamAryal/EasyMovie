@@ -1,4 +1,4 @@
-package com.example.easymovie.data.model.MovieList
+package com.example.easymovie.data.model.movielist
 
 import java.io.Serializable
 

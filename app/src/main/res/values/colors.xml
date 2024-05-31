@@ -6,5 +6,7 @@
     <color name="selected_background">#000000</color>
     <color name="default_background">#3d3d3d</color>
     <color name="settings_card_background">#0277BD</color>
+    <color name="info_bg_color">#F0400740</color>
     <color name="settings_card_background_focussed">#01579B</color>
+    <color name="custom_text_color">#FFEEEEEE</color>
 </resources>

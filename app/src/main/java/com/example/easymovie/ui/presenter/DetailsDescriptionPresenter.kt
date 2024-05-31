@@ -1,7 +1,7 @@
 package com.example.easymovie.ui.presenter
 
 import androidx.leanback.widget.AbstractDetailsDescriptionPresenter
-import com.example.easymovie.data.model.MovieList.Result
+import com.example.easymovie.data.model.movielist.Result
 
 class DetailsDescriptionPresenter:AbstractDetailsDescriptionPresenter() {
     override fun onBindDescription(viewHolder: ViewHolder, item: Any) {

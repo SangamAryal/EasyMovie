@@ -6,7 +6,7 @@ import android.util.Log
 import androidx.leanback.app.VideoSupportFragment
 import androidx.leanback.app.VideoSupportFragmentGlueHost
 import androidx.leanback.media.PlaybackTransportControlGlue
-import com.example.easymovie.data.model.MovieList.Result
+import com.example.easymovie.data.model.movielist.Result
 import com.example.easymovie.ui.activity.DetailsActivity
 import com.example.easymovie.ui.customplayback.Media3PlayerAdapter
 

@@ -62,8 +62,6 @@ class CardPresenter : Presenter() {
 
     private fun updateCardBackgroundColor(view: CustomBaseCardView, selected: Boolean) {
         val color = if (selected) sSelectedBackgroundColor else sDefaultBackgroundColor
-        // Both background colors should be set because the view"s background is temporarily visible
-        // during animations.
         view.setBackgroundColor(color)
         view.setInfoAreaBackgroundColor(color)
     }

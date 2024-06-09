@@ -1,4 +1,4 @@
-package com.example.easymovie.ui.customplayback
+package com.example.easymovie.ui.custom.customplayback
 
 import android.content.Context
 import android.net.Uri
@@ -64,14 +64,17 @@ class Media3PlayerAdapter(context: Context) : PlayerAdapter() {
     }
 
 
-
     private fun notifyBufferStartEnd() {
-        callback?.onBufferingStateChanged(this@Media3PlayerAdapter,
-            mBufferingStart || !mInitialized);
+        callback?.onBufferingStateChanged(
+            this@Media3PlayerAdapter,
+            mBufferingStart || !mInitialized
+        );
     }
+
     private fun getUpdatePeriod(): Long {
         return 1000
     }
+
     override fun setProgressUpdatingEnabled(enabled: Boolean) {
         if (enabled) {
             mHandler.post(mUpdatePositionRunnable)
@@ -122,7 +125,7 @@ class Media3PlayerAdapter(context: Context) : PlayerAdapter() {
 
     override fun seekTo(positionMs: Long) {
         if (!mInitialized) {
-          return
+            return
         }
         exoPlayer.seekTo(positionMs)
     }

@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-<!--    <style name="Theme.LeanViewsTV." parent="@style/Theme.Leanback">-->
+    <!--    <style name="Theme.LeanViewsTV." parent="@style/Theme.Leanback">-->
 
-<!--    </style>-->
+    <!--    </style>-->
 
-<!--    <style name="CustomBaseCardViewStyle" parent="Widget.Leanback.BaseCardViewStyle">-->
-<!--        <item name="cardBackgroundColor">@color/settings_card_background_focussed</item>-->
-<!--        <item name="cardViewStyle"></item>-->
-<!--    </style>-->
+    <!--    <style name="CustomBaseCardViewStyle" parent="Widget.Leanback.BaseCardViewStyle">-->
+    <!--        <item name="cardBackgroundColor">@color/settings_card_background_focussed</item>-->
+    <!--        <item name="cardViewStyle"></item>-->
+    <!--    </style>-->
+
+    <style name="CircularImageView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.App.CircularImageView</item>
+    </style>
+
+    <style name="ShapeAppearance.App.CircularImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
     <style name="CustomImageCardViewStyle" parent="Widget.Leanback.ImageCardViewStyle">
         <item name="cardBackground">#F0F</item>
         <item name="android:layout_width">wrap_content</item>
@@ -20,11 +30,13 @@
         <item name="infoAreaBackground">@null</item>
         <item name="lbImageCardViewType">Title|Content</item>
     </style>
+
     <style name="CustomImageCardTheme" parent="Theme.Leanback">
         <item name="imageCardViewStyle">@style/CustomImageCardViewStyle</item>
         <item name="imageCardViewInfoAreaStyle">@style/CustomInfoStyle</item>
         <item name="imageCardViewTitleStyle">@style/CustomTitleStyle</item>
     </style>
+
     <style name="CustomInfoStyle" parent="Widget.Leanback.ImageCardView.InfoAreaStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -36,8 +48,59 @@
         <item name="android:paddingTop">@dimen/info_padding_top</item>
         <item name="android:background">@color/info_bg_color</item>
     </style>
+
     <style name="CustomTitleStyle" parent="Widget.Leanback.ImageCardView.TitleStyle">
         <item name="android:textColor">@color/custom_text_color</item>
         <item name="android:textSize">@dimen/custom_text_size</item>
     </style>
-    </resources>
+
+    <!--    <style name="Theme.LeanbackBase" parent="android:Theme.Holo.NoActionBar" tools:override="true">-->
+    <!--        <item name="playbackProgressPrimaryColor" tools:ignore="PrivateResource">-->
+    <!--            @color/lb_playback_progress_color_no_theme-->
+    <!--        </item>-->
+    <!--        <item name="playbackControlsIconHighlightColor" tools:ignore="PrivateResource">-->
+    <!--            @color/lb_playback_icon_highlight_no_theme-->
+    <!--        </item>-->
+    <!--        <item name="defaultBrandColor" tools:ignore="PrivateResource">-->
+    <!--            @color/lb_default_brand_color-->
+    <!--        </item>-->
+    <!--        <item name="defaultBrandColorDark" tools:ignore="PrivateResource">-->
+    <!--            @color/lb_default_brand_color_dark-->
+    <!--        </item>-->
+
+    <!--        <item name="android:windowOverscan">true</item>-->
+    <!--        <item name="guidedStepTheme">@style/Theme.Leanback.GuidedStep</item>-->
+    <!--    </style>-->
+
+    <style name="TextAppearance.Leanback.PlaybackMediaItemName" tools:override="true">
+        <item name="android:textColor">#F33331</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">sans-serif-regular</item>
+    </style>
+
+    <style name="Widget.Leanback.DetailsDescriptionTitleStyle" tools:override="true">
+        <item name="android:textAlignment">viewEnd</item>
+        <item name="android:textAppearance">@style/TextAppearance.Leanback.DetailsDescriptionTitle
+        </item>
+        <item name="android:maxLines" tools:ignore="PrivateResource">
+            @integer/lb_details_description_title_max_lines
+        </item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:ellipsize">end</item>
+        <item name="resizeTrigger">maxLines</item>
+        <item name="resizedTextSize">@dimen/lb_details_description_title_resized_text_size</item>
+        <item name="resizedPaddingAdjustmentTop">
+            @dimen/lb_details_description_title_padding_adjust_top
+        </item>
+        <item name="resizedPaddingAdjustmentBottom">
+            @dimen/lb_details_description_title_padding_adjust_bottom
+        </item>
+    </style>
+
+    <style name="MySeekBar">
+        <item name="android:progressBackgroundTint">@color/lb_playback_progress_primary_color</item>
+        <item name="android:progressTint">@color/progressTint</item>
+        <item name="android:colorControlActivated">@color/lb_playback_progress_primary_color</item>
+    </style>
+
+</resources>

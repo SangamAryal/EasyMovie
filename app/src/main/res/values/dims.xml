@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="image_card_width">176dp</dimen>
     <dimen name="image_card_height">313dp</dimen>
     <dimen name="custom_text_size">14sp</dimen>
     <dimen name="info_padding_bottom">8dp</dimen>
     <dimen name="info_padding_horizontal">11dp</dimen>
     <dimen name="info_padding_top">7dp</dimen>
+    <dimen name="lb_details_description_body_text_size" tools:override="true">16sp</dimen>
+    <!--    <dimen name="lb_details_description_title_padding_adjust_bottom" tools:override="true">2dp-->
+    <!--    </dimen>-->
+    <dimen name="lb_details_v2_card_height" tools:override="true">350dp</dimen>
 </resources>

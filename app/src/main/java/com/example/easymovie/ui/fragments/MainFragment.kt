@@ -1,7 +1,11 @@
 package com.example.easymovie.ui.fragments
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.leanback.app.BrowseSupportFragment
 import androidx.leanback.widget.ArrayObjectAdapter
@@ -19,13 +23,33 @@ class MainFragment : BrowseSupportFragment() {
         mainFragmentRegistry.registerFragment(
             PageRow::class.java, PageRowFragmentFactory()
         )
+        checkStoragePermission()
         setupUIElements()
         prepareEntranceTransition()
         setupPageRows()
         setupEventListeners()
     }
 
+    private fun checkStoragePermission() {
+        if (ContextCompat.checkSelfPermission(
+                requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
+                requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
 
+            // Requesting the permission
+            ActivityCompat.requestPermissions(
+                requireActivity(), arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ), STORAGE_PERMISSION_CODE
+            )
+        } else {
+            Log.d(TAG, "checkStoragePermission: Permission is already granted")
+        }
+
+    }
 
     private fun setupUIElements() {
         title = getString(R.string.browse_title)
@@ -34,7 +58,6 @@ class MainFragment : BrowseSupportFragment() {
         brandColor = ContextCompat.getColor(requireActivity(), R.color.fastlane_background)
         searchAffordanceColor = ContextCompat.getColor(requireActivity(), R.color.search_opaque)
     }
-
 
 
     private fun setupPageRows() {
@@ -54,13 +77,17 @@ class MainFragment : BrowseSupportFragment() {
 
         adapter = rowsAdapter
     }
-    // Set the fragment factory with the fetched movie list
-
 
     private fun setupEventListeners() {
         setOnSearchClickedListener {
             val intent = Intent(activity, SearchActivity::class.java)
             startActivity(intent)
         }
+    }
+
+
+    companion object {
+        private const val STORAGE_PERMISSION_CODE = 100
+        private const val TAG = "MainFragment"
     }
 }

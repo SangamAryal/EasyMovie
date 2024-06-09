@@ -82,4 +82,34 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="cast_image">TODO</string>
+
+    <!-- Guided step fragment -->
+    <!-- Dialog example -->
+    <string name="dialog_example_title">Use Google\'s location service?</string>
+    <string name="dialog_example_description">Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</string>
+    <string name="dialog_example_button_positive">Agree</string>
+    <string name="dialog_example_button_negative">Disagree</string>
+    <string name="dialog_example_button_toast_positive_clicked">\'Agree\' clicked.</string>
+    <string name="dialog_example_button_toast_negative_clicked">\'Disagree\' clicked.</string>
+    <string name="rent_options_title">Rent Options</string>
+    <string name="rent_options_description">Select your rental option</string>
+    <string name="rent_hd_price">$4.99 for HD supported device</string>
+    <string name="rent_sd_price">$2.99 to watch in SD</string>
+    <string name="enter_card_details">Enter your card details</string>
+    <string name="rent_hd">$4.99 for HD supported device</string>
+    <string name="rent_sd">$2.99 to watch in SD</string>
+    <string name="payment_method_title">Payment Method</string>
+    <string name="payment_method_description">Select your payment method</string>
+    <string name="select_card">Select Card</string>
+    <string name="select_card_description">Choose your card or add a new one</string>
+    <string name="add_new_card">Add New Card</string>
+    <string name="add_new_card_title">Add a New Card</string>
+    <string name="add_new_card_description">Enter your card details</string>
+    <string name="enter_card_number">Card Number</string>
+    <string name="select_expiry_date">Expiry Date</string>
+    <string name="select_expiry_date_title">Select Expiry Date</string>
+    <string name="select_expiry_date_description">Choose the card expiry date</string>
+
+
 </resources>

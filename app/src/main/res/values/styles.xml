@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!--    <style name="Theme.LeanViewsTV." parent="@style/Theme.Leanback">-->
-
-    <!--    </style>-->
 
     <!--    <style name="CustomBaseCardViewStyle" parent="Widget.Leanback.BaseCardViewStyle">-->
     <!--        <item name="cardBackgroundColor">@color/settings_card_background_focussed</item>-->
@@ -54,23 +51,6 @@
         <item name="android:textSize">@dimen/custom_text_size</item>
     </style>
 
-    <!--    <style name="Theme.LeanbackBase" parent="android:Theme.Holo.NoActionBar" tools:override="true">-->
-    <!--        <item name="playbackProgressPrimaryColor" tools:ignore="PrivateResource">-->
-    <!--            @color/lb_playback_progress_color_no_theme-->
-    <!--        </item>-->
-    <!--        <item name="playbackControlsIconHighlightColor" tools:ignore="PrivateResource">-->
-    <!--            @color/lb_playback_icon_highlight_no_theme-->
-    <!--        </item>-->
-    <!--        <item name="defaultBrandColor" tools:ignore="PrivateResource">-->
-    <!--            @color/lb_default_brand_color-->
-    <!--        </item>-->
-    <!--        <item name="defaultBrandColorDark" tools:ignore="PrivateResource">-->
-    <!--            @color/lb_default_brand_color_dark-->
-    <!--        </item>-->
-
-    <!--        <item name="android:windowOverscan">true</item>-->
-    <!--        <item name="guidedStepTheme">@style/Theme.Leanback.GuidedStep</item>-->
-    <!--    </style>-->
 
     <style name="TextAppearance.Leanback.PlaybackMediaItemName" tools:override="true">
         <item name="android:textColor">#F33331</item>
@@ -102,5 +82,6 @@
         <item name="android:progressTint">@color/progressTint</item>
         <item name="android:colorControlActivated">@color/lb_playback_progress_primary_color</item>
     </style>
+
 
 </resources>

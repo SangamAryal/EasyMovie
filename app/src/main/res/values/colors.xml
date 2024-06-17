@@ -2,13 +2,16 @@
     <color name="background_gradient_start">#000000</color>
     <color name="background_gradient_end">#DDDDDD</color>
     <color name="fastlane_background">#000000</color>
+    <color name="progress_tint_color">#F30A0A</color>
     <color name="search_opaque">#000000</color>
     <color name="selected_background">#000000</color>
     <color name="default_background">#3d3d3d</color>
+    <color name="bar">#878787</color>
     <color name="settings_card_background">#0277BD</color>
     <color name="info_bg_color">#F0400740</color>
     <color name="settings_card_background_focussed">#01579B</color>
     <color name="custom_text_color">#FFEEEEEE</color>
+    <color name="transparent">#00000000</color>
     <color name="lb_guidedactions_background" tools:override="true">#b33c05</color>
     <color name="lb_guidedactions_background_dark" tools:override="true">#b33c05</color>
     <color name="lb_details_description_color" tools:override="true">#CDA0CF</color>
@@ -22,6 +25,7 @@
     <color name="lb_playback_progress_primary_color" tools:override="true">#F0400740
     </color>
     <color name="progressTint" tools:override="true">#F0400740</color>
+    <color name="tabIndicatorColor" >#F0E30202</color>
     <color name="lb_default_brand_color_dark" tools:overrid="true">#000000</color>
 
 

@@ -46,6 +46,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.activity.DetailsActivity"
+            android:theme="@style/Theme.AppCompat"
             android:exported="false" />
         <activity
             android:name=".ui.activity.MainActivity"

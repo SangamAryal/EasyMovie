@@ -6,11 +6,12 @@ glide = "4.12.0"
 gson = "2.10.1"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
-appcompat = "1.6.1"
+appcompat = "1.7.0"
 leanbackPreferenceVersion = "1.2.0-alpha04"
 leanbackVersion = "1.0.0"
-lifecycleViewmodelKtx = "2.8.0"
-lifecycleViewmodelKtxVersion = "2.8.0"
+leanbackTab = "1.1.0-beta01"
+lifecycleViewmodelKtx = "2.8.2"
+lifecycleViewmodelKtxVersion = "2.8.2"
 loader = "1.1.0"
 loggingInterceptor = "3.11.0"
 material = "1.12.0"
@@ -21,13 +22,15 @@ preference = "1.2.1"
 
 
 
+
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
 androidx-constraintlayout-v220alpha13 = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayoutVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-leanback-preference-v120alpha04 = { module = "androidx.leanback:leanback-preference", version.ref = "leanbackPreferenceVersion" }
-androidx-leanback-v100 = { module = "androidx.leanback:leanback", version.ref = "leanbackVersion" }
+androidx-leanback = { module = "androidx.leanback:leanback", version.ref = "leanbackVersion" }
+androidx-leanback-tab = { module = "androidx.leanback:leanback-tab", version.ref = "leanbackTab" }
 androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-lifecycle-viewmodel-ktx-v262 = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtxVersion" }
 androidx-loader = { module = "androidx.loader:loader", version.ref = "loader" }

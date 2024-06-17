@@ -1,23 +1,34 @@
 package com.example.easymovie.ui.activity
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.KeyEvent
+
 import androidx.fragment.app.FragmentActivity
+import androidx.leanback.tab.LeanbackTabLayout
+import androidx.leanback.tab.LeanbackViewPager
 import com.example.easymovie.R
-import com.example.easymovie.interfaces.OnFragmentKeyListener
-import com.example.easymovie.ui.fragments.MovieDetailsFragment
-import com.example.easymovie.ui.fragments.MoviesRowFragment
+import com.example.easymovie.ui.fragments.adapter.TabFragmentAdapter
+
 
 class DetailsActivity : FragmentActivity() {
+    private lateinit var viewPager: LeanbackViewPager
+    private lateinit var tabLayout: LeanbackTabLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.details_fragment, MovieDetailsFragment())
-                .commitNow()
-        }
+        setContentView(R.layout.detail_main)
+
+        viewPager = findViewById(R.id.view_pager)
+        tabLayout = findViewById(R.id.tab_layout)
+
+        // Set up ViewPager with a FragmentStateAdapter
+        viewPager.adapter = TabFragmentAdapter(supportFragmentManager)
+        tabLayout.setupWithViewPager(viewPager)
+
+
+//        if (savedInstanceState == null) {
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.detail_fragment, DetailsMovieFragment())
+//                .commitNow()
+//        }
     }
 
 //    @SuppressLint("RestrictedApi")

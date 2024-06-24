@@ -1,26 +1,22 @@
 package com.example.easymovie.ui.activity
 
+import PageFragment
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.leanback.tab.LeanbackTabLayout
-import androidx.leanback.tab.LeanbackViewPager
+import androidx.fragment.app.FragmentTransaction
 import com.example.easymovie.R
-import com.example.easymovie.ui.fragments.adapter.TabFragmentAdapter
 
 
 class DetailsActivity : FragmentActivity() {
-    private lateinit var viewPager: LeanbackViewPager
-    private lateinit var tabLayout: LeanbackTabLayout
-
     private lateinit var logo: ImageView
     private lateinit var search: TextView
     private lateinit var browse: TextView
@@ -34,6 +30,10 @@ class DetailsActivity : FragmentActivity() {
     private lateinit var descriptionTextView: TextView
 
     private lateinit var playButton: ImageView
+    private lateinit var tab1: TextView
+    private lateinit var tab2: TextView
+    private lateinit var tab3: TextView
+    private lateinit var tab4: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,13 +46,101 @@ class DetailsActivity : FragmentActivity() {
 //        }
 //    }
 
+        tab1 = findViewById(R.id.tab1)
+        tab2 = findViewById(R.id.tab2)
+        tab3 = findViewById(R.id.tab3)
+        tab4 = findViewById(R.id.tab4)
 
-        viewPager = findViewById(R.id.view_pager)
-        tabLayout = findViewById(R.id.tab_layout)
+        tab1.setOnClickListener {
+            loadFragment(PageFragment.newInstance(1))
+        }
 
-        // Set up ViewPager with a FragmentStateAdapter
-        viewPager.adapter = TabFragmentAdapter(supportFragmentManager)
-        tabLayout.setupWithViewPager(viewPager)
+        tab2.setOnClickListener {
+            loadFragment(PageFragment.newInstance(2))
+        }
+
+        tab3.setOnClickListener {
+            loadFragment(PageFragment.newInstance(3))
+        }
+
+        tab4.setOnClickListener {
+            loadFragment(PageFragment.newInstance(4))
+        }
+
+        tab1.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                v.elevation = 8.0f
+                if (v is TextView) {
+                    v.setTypeface(null, Typeface.BOLD)
+                    v.setTextColor(Color.WHITE)
+                    loadFragment(PageFragment.newInstance(1))
+
+                }
+            } else {
+                v.elevation = 0f
+                if (v is TextView) {
+                    v.setTypeface(null, Typeface.NORMAL)
+                    v.setTextColor(ContextCompat.getColor(this, R.color.bar))
+                }
+            }
+        }
+        tab2.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                v.elevation = 8.0f
+                if (v is TextView) {
+                    v.setTypeface(null, Typeface.BOLD)
+                    v.setTextColor(Color.WHITE)
+                    loadFragment(PageFragment.newInstance(2))
+
+                }
+            } else {
+                v.elevation = 0f
+                if (v is TextView) {
+                    v.setTypeface(null, Typeface.NORMAL)
+                    v.setTextColor(ContextCompat.getColor(this, R.color.bar))
+                }
+            }
+        }
+        tab3.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                v.elevation = 8.0f
+                if (v is TextView) {
+                    v.setTypeface(null, Typeface.BOLD)
+                    v.setTextColor(Color.WHITE)
+                    loadFragment(PageFragment.newInstance(3))
+
+                }
+            } else {
+                v.elevation = 0f
+                if (v is TextView) {
+                    v.setTypeface(null, Typeface.NORMAL)
+                    v.setTextColor(ContextCompat.getColor(this, R.color.bar))
+                }
+            }
+        }
+        tab4.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                v.elevation = 8.0f
+                if (v is TextView) {
+                    v.setTypeface(null, Typeface.BOLD)
+                    v.setTextColor(Color.WHITE)
+                    loadFragment(PageFragment.newInstance(4))
+
+                }
+            } else {
+                v.elevation = 0f
+                if (v is TextView) {
+                    v.setTypeface(null, Typeface.NORMAL)
+                    v.setTextColor(ContextCompat.getColor(this, R.color.bar))
+                }
+            }
+        }
+
+
+        // Load initial fragment
+        loadFragment(PageFragment.newInstance(1))
+
+
 
         logo = findViewById(R.id.logo)
         search = findViewById(R.id.search)
@@ -83,6 +171,12 @@ class DetailsActivity : FragmentActivity() {
 
 
         logo.requestFocus()
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
     }
 
 
@@ -132,28 +226,12 @@ class DetailsActivity : FragmentActivity() {
         val focusedView = currentFocus
         return when (keyCode) {
             KeyEvent.KEYCODE_DPAD_LEFT -> {
-                if (focusedView is LeanbackTabLayout) {
-                    // Switch to the previous tab
-                    val currentItem = viewPager.currentItem
-                    Log.d(TAG, "onKeyDown: ")
-                    if (currentItem > 0) {
-                        viewPager.currentItem = currentItem - 1
-                    }
-                } else {
-                    handleDpadLeft(focusedView)
-                }
+                handleDpadLeft(focusedView)
                 true
             }
 
             KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                if (focusedView is LeanbackTabLayout) {
-                    val currentItem = viewPager.currentItem
-                    if (currentItem < (viewPager.id)) {
-                        viewPager.currentItem = currentItem + 1
-                    }
-                } else {
-                    handleDpadRight(focusedView)
-                }
+                handleDpadRight(focusedView)
                 true
             }
 
@@ -177,6 +255,10 @@ class DetailsActivity : FragmentActivity() {
             R.id.notification_icon -> search.requestFocus()
             R.id.profile_pic -> notificationIcon.requestFocus()
             R.id.browse -> logo.requestFocus()
+            R.id.tab1 -> playButton.requestFocus()
+            R.id.tab2 -> tab1.requestFocus()
+            R.id.tab3 -> tab2.requestFocus()
+            R.id.tab4 -> tab3.requestFocus()
         }
     }
 
@@ -186,14 +268,18 @@ class DetailsActivity : FragmentActivity() {
             R.id.browse -> search.requestFocus()
             R.id.search -> notificationIcon.requestFocus()
             R.id.notification_icon -> profilePic.requestFocus()
-            R.id.play_button -> tabLayout.requestFocus()
+            R.id.play_button -> tab1.requestFocus()
+            R.id.tab1 -> tab2.requestFocus()
+            R.id.tab2 -> tab3.requestFocus()
+            R.id.tab3 -> tab4.requestFocus()
+
         }
     }
 
     private fun handleDpadUp(focusedView: View?) {
         when (focusedView?.id) {
             R.id.play_button -> logo.requestFocus()
-            R.id.tab_layout -> logo.requestFocus()
+            R.id.tab1, R.id.tab2, R.id.tab3, R.id.tab4 -> profilePic.requestFocus()
 
         }
     }

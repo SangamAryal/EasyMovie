@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/details_background"
     android:layout_marginStart="0dp"
+    android:background="@color/details_background"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -105,26 +104,83 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
         android:orientation="vertical">
 
-        <androidx.leanback.tab.LeanbackTabLayout
-            android:id="@+id/tab_layout"
-            android:layout_width="wrap_content"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/leanbackTabLayout"
-            app:tabIndicatorFullWidth="false"
-            app:tabBackground="@color/transparent"
-            app:tabIndicatorColor="@color/tabIndicatorColor" />
-
-        <androidx.leanback.tab.LeanbackViewPager
-            android:id="@+id/view_pager"
+        <LinearLayout
+            android:id="@+id/tabContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/leanbackViewpager" />
+            android:orientation="horizontal">
 
+            <!--  Tab Bars -->
+
+            <TextView
+                android:id="@+id/tab1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:drawableBottom="@drawable/tab_bar"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:text="@string/overview"
+                android:textAlignment="center"
+                android:textColor="@color/bar"
+                android:textFontWeight="700"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tab2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="13sp"
+                android:textColor="@color/bar"
+                android:focusable="true"
+                android:drawableBottom="@drawable/tab_bar"
+                android:focusableInTouchMode="true"
+                android:background="@color/transparent"
+                android:textFontWeight="700"
+                android:text="@string/episodes" />
+
+            <TextView
+                android:id="@+id/tab3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="13sp"
+                android:textColor="@color/bar"
+                android:drawableBottom="@drawable/tab_bar"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:textFontWeight="700"
+                android:background="@color/transparent"
+                android:text="@string/trailers" />
+
+            <TextView
+                android:id="@+id/tab4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="13sp"
+                android:gravity="start"
+                android:layout_gravity="start"
+                android:focusable="true"
+                android:textColor="@color/bar"
+                android:drawableBottom="@drawable/tab_bar"
+                android:focusableInTouchMode="true"
+                android:textFontWeight="700"
+                android:background="@color/transparent"
+                android:text="@string/more_like_this" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

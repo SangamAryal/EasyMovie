@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.DetailsActivity"
     tools:deviceIds="tv"
-    android:background="@color/fastlane_background">
+    android:background="@color/details_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,10 +26,21 @@
             <!-- Include the left part layout -->
             <include layout="@layout/left_detail" />
 
-
             <!-- Include right part of the layout -->
             <include layout="@layout/right_detail" />
 
         </LinearLayout>
     </LinearLayout>
+    <ImageButton
+        android:id="@+id/play_button"
+        android:layout_width="80dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_height="80dp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="332dp"
+        android:padding="30dp"
+        android:contentDescription="@string/play_button"
+        android:src="@drawable/play_button_selector" />
+
 </FrameLayout>

@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.easymovie.R
 
-open class CustomBaseCardView @JvmOverloads constructor(
+open class CustomCardView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0

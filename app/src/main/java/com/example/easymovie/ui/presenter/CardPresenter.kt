@@ -8,7 +8,7 @@ import androidx.leanback.widget.Presenter
 import com.bumptech.glide.Glide
 import com.example.easymovie.R
 import com.example.easymovie.data.model.movielist.Result
-import com.example.easymovie.ui.custom.CustomBaseCardView
+import com.example.easymovie.ui.custom.CustomCardView
 import com.example.easymovie.utils.Constants.IMAGE_BASE_URL
 import kotlin.properties.Delegates
 
@@ -25,7 +25,7 @@ class CardPresenter : Presenter() {
             ContextCompat.getColor(parent.context, R.color.selected_background)
         mDefaultCardImage = ContextCompat.getDrawable(parent.context, R.drawable.movie)
 
-        val cardView = object : CustomBaseCardView(parent.context) {
+        val cardView = object : CustomCardView(parent.context) {
             override fun setSelected(selected: Boolean) {
                 updateCardBackgroundColor(this, selected)
                 super.setSelected(selected)
@@ -40,7 +40,7 @@ class CardPresenter : Presenter() {
 
     override fun onBindViewHolder(viewHolder: ViewHolder, item: Any?) {
         val movie = item as Result
-        val cardView = viewHolder.view as CustomBaseCardView
+        val cardView = viewHolder.view as CustomCardView
         val url = IMAGE_BASE_URL + movie.poster_path
 
         Log.d(TAG, "onBindViewHolder")
@@ -55,12 +55,12 @@ class CardPresenter : Presenter() {
 
     override fun onUnbindViewHolder(viewHolder: ViewHolder) {
         Log.d(TAG, "onUnbindViewHolder")
-        val cardView = viewHolder.view as CustomBaseCardView
+        val cardView = viewHolder.view as CustomCardView
         // Remove references to images so that the garbage collector can free up memory
         cardView.mainImageView.setImageDrawable(null)
     }
 
-    private fun updateCardBackgroundColor(view: CustomBaseCardView, selected: Boolean) {
+    private fun updateCardBackgroundColor(view: CustomCardView, selected: Boolean) {
         val color = if (selected) sSelectedBackgroundColor else sDefaultBackgroundColor
         view.setBackgroundColor(color)
         view.setInfoAreaBackgroundColor(color)

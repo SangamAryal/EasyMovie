@@ -18,13 +18,13 @@ import com.example.easymovie.data.model.movielist.Result
 import com.example.easymovie.ui.activity.DetailsActivity
 import com.example.easymovie.ui.custom.CustomPlaybackSeekDataProvider
 import com.example.easymovie.ui.custom.VideoMediaPlayerGlue
-import com.example.easymovie.ui.custom.customplayback.Media3PlayerAdapter
+import com.example.easymovie.ui.custom.customplayback.ExoPlayerAdapter
 import com.example.easymovie.ui.presenter.CardPresenter
 import com.example.easymovie.viewmodels.MovieListViewModelFactory
 import com.example.easymovie.viewmodels.MoviesListViewModel
 
 class PlaybackVideoFragment : VideoSupportFragment() {
-    private lateinit var mTransportControlGlue: VideoMediaPlayerGlue<Media3PlayerAdapter>
+    private lateinit var mTransportControlGlue: VideoMediaPlayerGlue<ExoPlayerAdapter>
     private val repository by lazy { (requireActivity().application as MyApplication).moviesRepository }
     private lateinit var mainViewModel: MoviesListViewModel
 
@@ -38,7 +38,7 @@ class PlaybackVideoFragment : VideoSupportFragment() {
             "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4"
         val glueHost = VideoSupportFragmentGlueHost(this@PlaybackVideoFragment)
 
-        val playerAdapter = Media3PlayerAdapter(requireActivity())
+        val playerAdapter = ExoPlayerAdapter(requireActivity())
         val seekSpeeds = intArrayOf(2, 4, 8)
         mTransportControlGlue = VideoMediaPlayerGlue(requireActivity(), playerAdapter, result)
         mTransportControlGlue.host = glueHost

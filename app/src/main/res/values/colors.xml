@@ -2,11 +2,14 @@
     <color name="background_gradient_start">#000000</color>
     <color name="background_gradient_end">#DDDDDD</color>
     <color name="fastlane_background">#000000</color>
+    <color name="details_background">#101010</color>
+    <color name="white_color">#FFFFFF</color>
     <color name="progress_tint_color">#F30A0A</color>
     <color name="search_opaque">#000000</color>
     <color name="selected_background">#000000</color>
     <color name="default_background">#3d3d3d</color>
-    <color name="bar">#878787</color>
+    <color name="bar">#A19797</color>
+    <color name="desc_color">#E3D7D7</color>
     <color name="settings_card_background">#0277BD</color>
     <color name="info_bg_color">#F0400740</color>
     <color name="settings_card_background_focussed">#01579B</color>

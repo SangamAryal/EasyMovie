@@ -43,7 +43,6 @@ dependencies {
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.constraintlayout.v220alpha13)
     implementation(libs.androidx.leanback)
-    implementation(libs.androidx.leanback.tab)
     implementation(libs.glide)
     implementation(libs.gson)
     implementation(libs.androidx.lifecycle.livedata.ktx)
@@ -58,5 +57,6 @@ dependencies {
     implementation(libs.androidx.preference)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.loader)
+    implementation(libs.androidx.leanback.tab)
 
 }

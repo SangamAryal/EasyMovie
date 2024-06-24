@@ -15,7 +15,7 @@ import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 
 
-class Media3PlayerAdapter(context: Context) : PlayerAdapter() {
+class ExoPlayerAdapter(context: Context) : PlayerAdapter() {
 
     private val exoPlayer: ExoPlayer = ExoPlayer.Builder(context).build()
     var mSurfaceHolderGlueHost: SurfaceHolderGlueHost? = null
@@ -26,7 +26,7 @@ class Media3PlayerAdapter(context: Context) : PlayerAdapter() {
     private val mUpdatePositionRunnable = object : Runnable {
         override fun run() {
             if (mInitialized && isPlaying()) {
-                callback?.onCurrentPositionChanged(this@Media3PlayerAdapter)
+                callback?.onCurrentPositionChanged(this@ExoPlayerAdapter)
                 mHandler.postDelayed(this, getUpdatePeriod())
             }
         }
@@ -36,29 +36,29 @@ class Media3PlayerAdapter(context: Context) : PlayerAdapter() {
     init {
         exoPlayer.addListener(object : Player.Listener {
             override fun onPlayerError(error: PlaybackException) {
-                Log.e("Media33PlayerAdapter", "Player error: ${error.message}")
+                Log.e("ExoPlayerAdapter", "Player error: ${error.message}")
             }
 
             override fun onPlaybackStateChanged(playbackState: Int) {
                 mBufferingStart = false
-                Log.d("Media33PlayerAdapter", "Playback state changed: $playbackState")
+                Log.d("ExoPlayerAdapter", "Playback state changed: $playbackState")
                 if (playbackState == ExoPlayer.STATE_READY && !mInitialized) {
                     mInitialized = true;
                     if (mSurfaceHolderGlueHost == null || mHasDisplay) {
-                        callback?.onPreparedStateChanged(this@Media3PlayerAdapter);
+                        callback?.onPreparedStateChanged(this@ExoPlayerAdapter);
                     }
                 } else if (playbackState == ExoPlayer.STATE_BUFFERING) {
                     mBufferingStart = true;
                 } else if (playbackState == ExoPlayer.STATE_ENDED) {
-                    callback?.onPlayStateChanged(this@Media3PlayerAdapter);
-                    callback?.onPlayCompleted(this@Media3PlayerAdapter);
+                    callback?.onPlayStateChanged(this@ExoPlayerAdapter);
+                    callback?.onPlayCompleted(this@ExoPlayerAdapter);
                 }
                 notifyBufferStartEnd()
             }
 
             override fun onIsPlayingChanged(isPlaying: Boolean) {
-                Log.d("Media33PlayerAdapter", "Is playing changed: $isPlaying")
-                callback?.onPlayStateChanged(this@Media3PlayerAdapter)
+                Log.d("ExoPlayerAdapter", "Is playing changed: $isPlaying")
+                callback?.onPlayStateChanged(this@ExoPlayerAdapter)
             }
         })
     }
@@ -66,8 +66,7 @@ class Media3PlayerAdapter(context: Context) : PlayerAdapter() {
 
     private fun notifyBufferStartEnd() {
         callback?.onBufferingStateChanged(
-            this@Media3PlayerAdapter,
-            mBufferingStart || !mInitialized
+            this@ExoPlayerAdapter, mBufferingStart || !mInitialized
         );
     }
 
@@ -105,20 +104,20 @@ class Media3PlayerAdapter(context: Context) : PlayerAdapter() {
     }
 
     override fun play() {
-        Log.d("Media33PlayerAdapter", "Play called")
+        Log.d("ExoPlayerAdapter", "Play called")
         if (!mInitialized || isPlaying()) {
             return
         }
         exoPlayer.playWhenReady = true
-        callback?.onPlayStateChanged(this@Media3PlayerAdapter)
-        callback?.onCurrentPositionChanged(this@Media3PlayerAdapter)
+        callback?.onPlayStateChanged(this@ExoPlayerAdapter)
+        callback?.onCurrentPositionChanged(this@ExoPlayerAdapter)
     }
 
     override fun pause() {
-        Log.d("Media33PlayerAdapter", "Pause called")
+        Log.d("ExoPlayerAdapter", "Pause called")
         if (isPlaying()) {
             exoPlayer.playWhenReady = false
-            callback?.onPlayStateChanged(this@Media3PlayerAdapter)
+            callback?.onPlayStateChanged(this@ExoPlayerAdapter)
         }
 
     }
@@ -128,6 +127,7 @@ class Media3PlayerAdapter(context: Context) : PlayerAdapter() {
             return
         }
         exoPlayer.seekTo(positionMs)
+        exoPlayer.playWhenReady = true
     }
 
     override fun getBufferedPosition(): Long {

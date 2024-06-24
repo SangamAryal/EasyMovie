@@ -116,8 +116,8 @@
     <string name="search_bar">Search</string>
     <string name="profile">Profile</string>
     <string name="notifications">Notifications</string>
-    <string name="title">Title</string>
-    <string name="subtitle">Subtitle</string>
+    <string name="title">Resume</string>
+    <string name="subtitle">S2 E2: Trick or Treat</string>
     <string name="overview">OVERVIEW</string>
     <string name="trailers_and_more">TRAILERS and MORE</string>
     <string name="when_a_young_boy_disappears_his_mother_a_police_chief_and_his_friends_must_confront_terrifying_forces_in_order_to_get_him_back">When a young boy disappears, his mother, a police chief, and his friends must confront terrifying forces in order to get him back.</string>
@@ -132,11 +132,12 @@
     <string name="episodes">EPISODES</string>
     <string name="more_like_this">MORE LIKE THIS</string>
     <string name="ep_description">When a young boy disappears, his mother, a police chief, and his friends must confront terrifying forces in order to get him back.</string>
-    <string name="cast_crew">Starring: Millie Bobby Brown, Finn Wolfhard, Winona Ryder</string>
-    <string name="created_by">Created by: The Duffer Brothers</string>
+    <string name="cast_crew">Millie Bobby Brown, Finn Wolfhard, Winona Ryder</string>
+    <string name="created_by">The Duffer Brothers</string>
     <string name="netflix_originals">Netflix Originals</string>
     <string name="leanbackViewpager">LeanbackViewPager</string>
     <string name="leanbackTabLayout">Leanback Tab Layout</string>
+    <string name="play_button">play_button</string>
 
 
 </resources>

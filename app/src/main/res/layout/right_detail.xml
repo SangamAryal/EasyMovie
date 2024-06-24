@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#000000"
+    android:background="@color/details_background"
+    android:layout_marginStart="0dp"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -12,6 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -26,8 +28,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="8dp">
+            android:layout_gravity="center_vertical">
 
             <TextView
                 android:id="@+id/title"
@@ -68,12 +69,12 @@
                 android:id="@+id/year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:layout_marginEnd="8dp"
                 android:drawableEnd="@drawable/vertical_bar"
                 android:drawablePadding="10dp"
                 android:text="@string/date_aired"
                 android:textColor="@color/bar"
+                android:textSize="14sp"
                 tools:ignore="UseCompatTextViewDrawableXml" />
 
             <TextView
@@ -81,9 +82,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:textSize="16sp"
                 android:text="@string/no_of_seasons"
-                android:textColor="@color/bar" />
+                android:textColor="@color/bar"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/rating"
@@ -92,8 +93,8 @@
                 android:drawableStart="@drawable/vertical_bar"
                 android:drawablePadding="10dp"
                 android:text="@string/rated"
-                android:textSize="16sp"
                 android:textColor="@color/bar"
+                android:textSize="14sp"
                 tools:ignore="UseCompatTextViewDrawableXml" />
         </LinearLayout>
 
@@ -104,22 +105,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
-        android:orientation="vertical" >
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
         <androidx.leanback.tab.LeanbackTabLayout
             android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="@color/tabIndicatorColor"
+            android:contentDescription="@string/leanbackTabLayout"
             app:tabIndicatorFullWidth="false"
-            android:contentDescription="@string/leanbackTabLayout">
-        </androidx.leanback.tab.LeanbackTabLayout>
+            app:tabBackground="@color/transparent"
+            app:tabIndicatorColor="@color/tabIndicatorColor" />
 
         <androidx.leanback.tab.LeanbackViewPager
             android:id="@+id/view_pager"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/leanbackViewpager"/>
+            android:contentDescription="@string/leanbackViewpager" />
+
+
     </LinearLayout>
 
 

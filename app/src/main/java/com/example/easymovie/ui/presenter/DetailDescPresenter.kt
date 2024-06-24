@@ -10,7 +10,7 @@ import com.example.easymovie.data.model.movielist.Result
 import com.example.easymovie.R
 import com.example.easymovie.utils.Constants.IMAGE_BASE_URL
 
-class DetailsDescPresenter : AbstractDetailsDescriptionPresenter() {
+class DetailDescPresenter : AbstractDetailsDescriptionPresenter() {
 
     override fun onBindDescription(viewHolder: ViewHolder, item: Any) {
         // Inflate the view if not already done

@@ -31,7 +31,7 @@ import com.example.easymovie.ui.activity.DetailsActivity
 import com.example.easymovie.ui.activity.MainActivity
 import com.example.easymovie.ui.activity.PlaybackActivity
 import com.example.easymovie.ui.presenter.CastCrewPresenter
-import com.example.easymovie.ui.presenter.DetailsDescPresenter
+import com.example.easymovie.ui.presenter.DetailDescPresenter
 import com.example.easymovie.utils.Constants.IMAGE_BASE_URL
 
 class MovieDetailsFragment : DetailsSupportFragment() {
@@ -130,7 +130,7 @@ class MovieDetailsFragment : DetailsSupportFragment() {
 
     private fun setupDetailsOverviewRowPresenter() {
         // Set detail background.
-        val detailsPresenter = FullWidthDetailsOverviewRowPresenter(DetailsDescPresenter())
+        val detailsPresenter = FullWidthDetailsOverviewRowPresenter(DetailDescPresenter())
         detailsPresenter.backgroundColor =
             ContextCompat.getColor(requireActivity(), R.color.selected_background)
 

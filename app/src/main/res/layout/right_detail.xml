@@ -105,74 +105,49 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="25dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/tabContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
             android:orientation="horizontal">
 
             <!--  Tab Bars -->
 
             <TextView
                 android:id="@+id/tab1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                style="@style/TabBarText"
                 android:layout_weight="1"
-                android:background="@color/transparent"
-                android:drawableBottom="@drawable/tab_bar"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:text="@string/overview"
-                android:textAlignment="center"
-                android:textColor="@color/bar"
-                android:textFontWeight="700"
-                android:textSize="13sp" />
+                android:text="@string/overview" />
 
             <TextView
                 android:id="@+id/tab2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                style="@style/TabBarText"
                 android:layout_weight="1"
-                android:textSize="13sp"
-                android:textColor="@color/bar"
-                android:focusable="true"
-                android:drawableBottom="@drawable/tab_bar"
-                android:focusableInTouchMode="true"
-                android:background="@color/transparent"
-                android:textFontWeight="700"
                 android:text="@string/episodes" />
 
             <TextView
                 android:id="@+id/tab3"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                style="@style/TabBarText"
                 android:layout_weight="1"
-                android:textSize="13sp"
-                android:textColor="@color/bar"
-                android:drawableBottom="@drawable/tab_bar"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:textFontWeight="700"
-                android:background="@color/transparent"
+                android:layout_marginEnd="50dp"
                 android:text="@string/trailers" />
 
             <TextView
                 android:id="@+id/tab4"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                style="@style/TabBarText"
                 android:layout_weight="1"
-                android:textSize="13sp"
-                android:gravity="start"
-                android:layout_gravity="start"
-                android:focusable="true"
-                android:textColor="@color/bar"
-                android:drawableBottom="@drawable/tab_bar"
-                android:focusableInTouchMode="true"
-                android:textFontWeight="700"
-                android:background="@color/transparent"
                 android:text="@string/more_like_this" />
 
         </LinearLayout>

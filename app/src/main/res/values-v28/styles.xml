@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TabBarText">
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:textSize">13sp</item>
+        <item name ="android:drawableBottom">@drawable/tab_bar</item>
+        <item name="android:textColor">@color/bar</item>
+
+    </style>
+
+</resources>

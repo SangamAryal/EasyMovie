@@ -1,11 +1,13 @@
 package com.example.easymovie.ui.activity
 
 import PageFragment
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -13,10 +15,15 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
+import com.bumptech.glide.Glide
 import com.example.easymovie.R
+import com.example.easymovie.data.model.movielist.Result
+import com.example.easymovie.utils.Constants.IMAGE_BASE_URL
 
 
 class DetailsActivity : FragmentActivity() {
+
+    private var mSelectedMovie: Result? = null
     private lateinit var logo: ImageView
     private lateinit var search: TextView
     private lateinit var browse: TextView
@@ -35,10 +42,14 @@ class DetailsActivity : FragmentActivity() {
     private lateinit var tab3: TextView
     private lateinit var tab4: TextView
 
+    private lateinit var episodeFragment: FrameLayout
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detail_main)
+
+        mSelectedMovie = this.intent.getSerializableExtra(DetailsActivity.MOVIE) as Result
 //        if (savedInstanceState == null) {
 //            supportFragmentManager.beginTransaction()
 //                .replace(R.id.details_fragment, MovieDetailsFragment())
@@ -148,16 +159,29 @@ class DetailsActivity : FragmentActivity() {
         notificationIcon = findViewById(R.id.notification_icon)
         profilePic = findViewById(R.id.profile_pic)
 
-
         imageViewLeft = findViewById(R.id.image_view_left)
+        mSelectedMovie?.poster_path?.let { posterPath ->
+            val url = IMAGE_BASE_URL + posterPath
+            Glide.with(this).load(url).into(imageViewLeft)
+        }
         titleTextView = findViewById(R.id.title)
         subtitleTextView = findViewById(R.id.subtitle)
         progressBar = findViewById(R.id.progress)
         descriptionTextView = findViewById(R.id.description)
 
         playButton = findViewById(R.id.play_button)
+        playButton.setOnClickListener {
+            val intent = Intent(this, PlaybackActivity::class.java)
+            intent.putExtra(MOVIE, mSelectedMovie)
+            startActivity(intent)
+
+        }
 
         // Set focus change listeners
+
+        titleTextView.text = mSelectedMovie!!.title
+        subtitleTextView.text = mSelectedMovie!!.original_title
+        descriptionTextView.text = mSelectedMovie!!.overview
         setFocusListener(browse)
         setFocusListener(search)
         setFocusListener(notificationIcon)
@@ -170,7 +194,7 @@ class DetailsActivity : FragmentActivity() {
         setFocusListener(descriptionTextView)
 
 
-        logo.requestFocus()
+        browse.requestFocus()
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -254,7 +278,7 @@ class DetailsActivity : FragmentActivity() {
             R.id.search -> browse.requestFocus()
             R.id.notification_icon -> search.requestFocus()
             R.id.profile_pic -> notificationIcon.requestFocus()
-            R.id.browse -> logo.requestFocus()
+//            R.id.browse -> logo.requestFocus()
             R.id.tab1 -> playButton.requestFocus()
             R.id.tab2 -> tab1.requestFocus()
             R.id.tab3 -> tab2.requestFocus()
@@ -264,7 +288,7 @@ class DetailsActivity : FragmentActivity() {
 
     private fun handleDpadRight(focusedView: View?) {
         when (focusedView?.id) {
-            R.id.logo -> browse.requestFocus()
+//            R.id.logo -> browse.requestFocus()
             R.id.browse -> search.requestFocus()
             R.id.search -> notificationIcon.requestFocus()
             R.id.notification_icon -> profilePic.requestFocus()
@@ -278,7 +302,7 @@ class DetailsActivity : FragmentActivity() {
 
     private fun handleDpadUp(focusedView: View?) {
         when (focusedView?.id) {
-            R.id.play_button -> logo.requestFocus()
+            R.id.play_button -> browse.requestFocus()
             R.id.tab1, R.id.tab2, R.id.tab3, R.id.tab4 -> profilePic.requestFocus()
 
         }
@@ -286,11 +310,16 @@ class DetailsActivity : FragmentActivity() {
 
     private fun handleDpadDown(focusedView: View?) {
         when (focusedView?.id) {
-            R.id.logo -> playButton.requestFocus()
+//            R.id.logo -> playButton.requestFocus()
             R.id.browse -> playButton.requestFocus()
             R.id.search -> playButton.requestFocus()
             R.id.notification_icon -> playButton.requestFocus()
             R.id.profile_pic -> playButton.requestFocus()
+//            R.id.tab2 -> {
+//                // Find the EpisodeFragment and request focus on its first focusable item
+//                val episodeFragment = supportFragmentManager.findFragmentById(R.id.episode_fragment) as? EpisodeFragment
+//                episodeFragment?.requestFocusOnFirstItem()
+//            }
 
         }
     }

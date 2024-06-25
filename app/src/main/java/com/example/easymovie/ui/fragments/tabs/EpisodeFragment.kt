@@ -20,8 +20,8 @@ class EpisodeFragment: RowsSupportFragment() {
     private val repository by lazy { (requireActivity().application as MyApplication).moviesRepository }
     private lateinit var mainViewModel: MoviesListViewModel
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         mainViewModel = ViewModelProvider(
             this, MovieListViewModelFactory(repository)
         )[MoviesListViewModel::class.java]

@@ -66,5 +66,15 @@
         <item name="android:colorControlActivated">@color/lb_playback_progress_primary_color</item>
     </style>
 
+    <style name="TabBarText">
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:textFontWeight" tools:targetApi="p">700</item>
+        <item name="android:textSize">13sp</item>
+        <item name ="android:drawableBottom">@drawable/tab_bar</item>
+        <item name="android:textColor">@color/bar</item>
+
+    </style>
+
 
 </resources>

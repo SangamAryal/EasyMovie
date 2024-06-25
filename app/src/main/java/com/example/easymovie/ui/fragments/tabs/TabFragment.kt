@@ -24,9 +24,8 @@ class TabFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val episodeFragment = EpisodeFragment()
         val transaction = childFragmentManager.beginTransaction()
-        transaction.replace(R.id.episode_fragment, episodeFragment).commit()
+        transaction.replace(R.id.episode_fragment, EpisodeFragment()).commit()
     }
 
 

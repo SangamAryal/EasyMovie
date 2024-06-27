@@ -40,6 +40,7 @@ class VideoMediaPlayerGlue<T : PlayerAdapter>(
     private val mSkipPreviousAction = SkipPreviousAction(context)
     private val mRepeatAction = RepeatAction(context)
 
+
     override fun onCreatePrimaryActions(adapter: ArrayObjectAdapter) {
         adapter.apply {
             add(mSkipPreviousAction)

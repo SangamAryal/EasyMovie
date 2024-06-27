@@ -127,7 +127,6 @@ class ExoPlayerAdapter(context: Context) : PlayerAdapter() {
             return
         }
         exoPlayer.seekTo(positionMs)
-        exoPlayer.playWhenReady = true
     }
 
     override fun getBufferedPosition(): Long {

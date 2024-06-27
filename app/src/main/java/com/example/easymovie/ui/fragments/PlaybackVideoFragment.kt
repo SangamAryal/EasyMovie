@@ -56,7 +56,8 @@ class PlaybackVideoFragment : VideoSupportFragment() {
 
         Log.d("PlaybackVideoFragment", "Initializing player")
         mTransportControlGlue.playWhenPrepared()
-        mTransportControlGlue.isSeekEnabled = true
+        mTransportControlGlue.isSeekEnabled = false
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -7,9 +7,7 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -18,183 +16,98 @@ import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
 import com.example.easymovie.R
 import com.example.easymovie.data.model.movielist.Result
+import com.example.easymovie.databinding.DetailMainBinding
+import com.example.easymovie.databinding.LeftDetailBinding
+import com.example.easymovie.databinding.RightDetailBinding
+import com.example.easymovie.databinding.TopBarBinding
 import com.example.easymovie.utils.Constants.IMAGE_BASE_URL
-
 
 class DetailsActivity : FragmentActivity() {
 
     private var mSelectedMovie: Result? = null
-    private lateinit var logo: ImageView
-    private lateinit var search: TextView
-    private lateinit var browse: TextView
-    private lateinit var notificationIcon: ImageView
-    private lateinit var profilePic: ImageView
 
-    private lateinit var imageViewLeft: ImageView
-    private lateinit var titleTextView: TextView
-    private lateinit var subtitleTextView: TextView
-    private lateinit var progressBar: ProgressBar
-    private lateinit var descriptionTextView: TextView
-
-    private lateinit var playButton: ImageView
-    private lateinit var tab1: TextView
-    private lateinit var tab2: TextView
-    private lateinit var tab3: TextView
-    private lateinit var tab4: TextView
-
-    private lateinit var episodeFragment: FrameLayout
-
+    private lateinit var detailMainBinding: DetailMainBinding
+    private lateinit var topBarBinding: TopBarBinding
+    private lateinit var leftDetailBinding: LeftDetailBinding
+    private lateinit var rightDetailBinding: RightDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.detail_main)
 
-        mSelectedMovie = this.intent.getSerializableExtra(DetailsActivity.MOVIE) as Result
-//        if (savedInstanceState == null) {
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.details_fragment, MovieDetailsFragment())
-//                .commitNow()
-//        }
-//    }
+        detailMainBinding = DetailMainBinding.inflate(layoutInflater)
+        setContentView(detailMainBinding.root)
 
-        tab1 = findViewById(R.id.tab1)
-        tab2 = findViewById(R.id.tab2)
-        tab3 = findViewById(R.id.tab3)
-        tab4 = findViewById(R.id.tab4)
+        // Initialize bindings for included layouts
+        topBarBinding = TopBarBinding.bind(detailMainBinding.root.findViewById(R.id.topp_bar))
+        leftDetailBinding =
+            LeftDetailBinding.bind(detailMainBinding.root.findViewById(R.id.left_part))
+        rightDetailBinding =
+            RightDetailBinding.bind(detailMainBinding.root.findViewById(R.id.right_part))
 
-        tab1.setOnClickListener {
-            loadFragment(PageFragment.newInstance(1))
-        }
+        mSelectedMovie = this.intent.getSerializableExtra(MOVIE) as Result
 
-        tab2.setOnClickListener {
-            loadFragment(PageFragment.newInstance(2))
-        }
-
-        tab3.setOnClickListener {
-            loadFragment(PageFragment.newInstance(3))
-        }
-
-        tab4.setOnClickListener {
-            loadFragment(PageFragment.newInstance(4))
-        }
-
-        tab1.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                v.elevation = 8.0f
-                if (v is TextView) {
-                    v.setTypeface(null, Typeface.BOLD)
-                    v.setTextColor(Color.WHITE)
-                    loadFragment(PageFragment.newInstance(1))
-
-                }
-            } else {
-                v.elevation = 0f
-                if (v is TextView) {
-                    v.setTypeface(null, Typeface.NORMAL)
-                    v.setTextColor(ContextCompat.getColor(this, R.color.bar))
-                }
-            }
-        }
-        tab2.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                v.elevation = 8.0f
-                if (v is TextView) {
-                    v.setTypeface(null, Typeface.BOLD)
-                    v.setTextColor(Color.WHITE)
-                    loadFragment(PageFragment.newInstance(2))
-
-                }
-            } else {
-                v.elevation = 0f
-                if (v is TextView) {
-                    v.setTypeface(null, Typeface.NORMAL)
-                    v.setTextColor(ContextCompat.getColor(this, R.color.bar))
-                }
-            }
-        }
-        tab3.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                v.elevation = 8.0f
-                if (v is TextView) {
-                    v.setTypeface(null, Typeface.BOLD)
-                    v.setTextColor(Color.WHITE)
-                    loadFragment(PageFragment.newInstance(3))
-
-                }
-            } else {
-                v.elevation = 0f
-                if (v is TextView) {
-                    v.setTypeface(null, Typeface.NORMAL)
-                    v.setTextColor(ContextCompat.getColor(this, R.color.bar))
-                }
-            }
-        }
-        tab4.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                v.elevation = 8.0f
-                if (v is TextView) {
-                    v.setTypeface(null, Typeface.BOLD)
-                    v.setTextColor(Color.WHITE)
-                    loadFragment(PageFragment.newInstance(4))
-
-                }
-            } else {
-                v.elevation = 0f
-                if (v is TextView) {
-                    v.setTypeface(null, Typeface.NORMAL)
-                    v.setTextColor(ContextCompat.getColor(this, R.color.bar))
-                }
-            }
-        }
-
+        // Set up tabs
+        setupTabs()
 
         // Load initial fragment
         loadFragment(PageFragment.newInstance(1))
 
-
-
-        logo = findViewById(R.id.logo)
-        search = findViewById(R.id.search)
-        browse = findViewById(R.id.browse)
-        notificationIcon = findViewById(R.id.notification_icon)
-        profilePic = findViewById(R.id.profile_pic)
-
-        imageViewLeft = findViewById(R.id.image_view_left)
         mSelectedMovie?.poster_path?.let { posterPath ->
             val url = IMAGE_BASE_URL + posterPath
-            Glide.with(this).load(url).into(imageViewLeft)
+            Glide.with(this).load(url).into(leftDetailBinding.imageViewLeft)
         }
-        titleTextView = findViewById(R.id.title)
-        subtitleTextView = findViewById(R.id.subtitle)
-        progressBar = findViewById(R.id.progress)
-        descriptionTextView = findViewById(R.id.description)
 
-        playButton = findViewById(R.id.play_button)
-        playButton.setOnClickListener {
+        leftDetailBinding.title.text = mSelectedMovie?.title
+        leftDetailBinding.subtitle.text = mSelectedMovie?.original_title
+        leftDetailBinding.description.text = mSelectedMovie?.overview
+
+        rightDetailBinding.title.text = mSelectedMovie?.title
+
+        // Set up play button
+        detailMainBinding.playButton.setOnClickListener {
             val intent = Intent(this, PlaybackActivity::class.java)
             intent.putExtra(MOVIE, mSelectedMovie)
             startActivity(intent)
-
         }
 
         // Set focus change listeners
+        setFocusListener(topBarBinding.browse)
+        setFocusListener(topBarBinding.search)
+        setFocusListener(topBarBinding.notificationIcon)
+        setFocusListener(topBarBinding.profilePic)
 
-        titleTextView.text = mSelectedMovie!!.title
-        subtitleTextView.text = mSelectedMovie!!.original_title
-        descriptionTextView.text = mSelectedMovie!!.overview
-        setFocusListener(browse)
-        setFocusListener(search)
-        setFocusListener(notificationIcon)
-        setFocusListener(profilePic)
+        topBarBinding.browse.requestFocus()
+    }
 
-        setFocusListenerImage(imageViewLeft)
-        setFocusListener(titleTextView)
-        setFocusListener(subtitleTextView)
-        setFocusListener(progressBar)
-        setFocusListener(descriptionTextView)
+    private fun setupTabs() {
+        val tabs = listOf(
+            rightDetailBinding.tab1 to 1,
+            rightDetailBinding.tab2 to 2,
+            rightDetailBinding.tab3 to 3,
+            rightDetailBinding.tab4 to 4
+        )
 
-
-        browse.requestFocus()
+        for ((tab, index) in tabs) {
+            tab.setOnClickListener {
+                loadFragment(PageFragment.newInstance(index))
+            }
+            tab.setOnFocusChangeListener { v, hasFocus ->
+                if (hasFocus) {
+                    v.elevation = 8.0f
+                    if (v is TextView) {
+                        v.setTypeface(null, Typeface.BOLD)
+                        v.setTextColor(Color.WHITE)
+                        loadFragment(PageFragment.newInstance(index))
+                    }
+                } else {
+                    v.elevation = 0f
+                    if (v is TextView) {
+                        v.setTypeface(null, Typeface.NORMAL)
+                        v.setTextColor(ContextCompat.getColor(this, R.color.bar))
+                    }
+                }
+            }
+        }
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -202,7 +115,6 @@ class DetailsActivity : FragmentActivity() {
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()
     }
-
 
     private fun setFocusListener(view: View) {
         view.setOnFocusChangeListener { v, hasFocus ->
@@ -224,16 +136,6 @@ class DetailsActivity : FragmentActivity() {
                 } else if (v is ImageView) {
                     v.setColorFilter(ContextCompat.getColor(this, R.color.bar))
                 }
-            }
-        }
-    }
-
-    private fun setFocusListenerImage(view: View) {
-        view.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                v.alpha = 1f
-            } else {
-                v.alpha = 0.5f
             }
         }
     }
@@ -275,55 +177,40 @@ class DetailsActivity : FragmentActivity() {
 
     private fun handleDpadLeft(focusedView: View?) {
         when (focusedView?.id) {
-            R.id.search -> browse.requestFocus()
-            R.id.notification_icon -> search.requestFocus()
-            R.id.profile_pic -> notificationIcon.requestFocus()
-//            R.id.browse -> logo.requestFocus()
-            R.id.tab1 -> playButton.requestFocus()
-            R.id.tab2 -> tab1.requestFocus()
-            R.id.tab3 -> tab2.requestFocus()
-            R.id.tab4 -> tab3.requestFocus()
+            R.id.search -> topBarBinding.browse.requestFocus()
+            R.id.notification_icon -> topBarBinding.search.requestFocus()
+            R.id.profile_pic -> topBarBinding.notificationIcon.requestFocus()
+            R.id.tab1 -> detailMainBinding.playButton.requestFocus()
+            R.id.tab2 -> rightDetailBinding.tab1.requestFocus()
+            R.id.tab3 -> rightDetailBinding.tab2.requestFocus()
+            R.id.tab4 -> rightDetailBinding.tab3.requestFocus()
         }
     }
 
     private fun handleDpadRight(focusedView: View?) {
         when (focusedView?.id) {
-//            R.id.logo -> browse.requestFocus()
-            R.id.browse -> search.requestFocus()
-            R.id.search -> notificationIcon.requestFocus()
-            R.id.notification_icon -> profilePic.requestFocus()
-            R.id.play_button -> tab1.requestFocus()
-            R.id.tab1 -> tab2.requestFocus()
-            R.id.tab2 -> tab3.requestFocus()
-            R.id.tab3 -> tab4.requestFocus()
-
+            R.id.browse -> topBarBinding.search.requestFocus()
+            R.id.search -> topBarBinding.notificationIcon.requestFocus()
+            R.id.notification_icon -> topBarBinding.profilePic.requestFocus()
+            R.id.play_button -> rightDetailBinding.tab1.requestFocus()
+            R.id.tab1 -> rightDetailBinding.tab2.requestFocus()
+            R.id.tab2 -> rightDetailBinding.tab3.requestFocus()
+            R.id.tab3 -> rightDetailBinding.tab4.requestFocus()
         }
     }
 
     private fun handleDpadUp(focusedView: View?) {
         when (focusedView?.id) {
-            R.id.play_button -> browse.requestFocus()
-            R.id.tab1, R.id.tab2, R.id.tab3, R.id.tab4 -> profilePic.requestFocus()
-
+            R.id.play_button -> topBarBinding.browse.requestFocus()
+            R.id.tab1, R.id.tab2, R.id.tab3, R.id.tab4 -> topBarBinding.profilePic.requestFocus()
         }
     }
 
     private fun handleDpadDown(focusedView: View?) {
         when (focusedView?.id) {
-//            R.id.logo -> playButton.requestFocus()
-            R.id.browse -> playButton.requestFocus()
-            R.id.search -> playButton.requestFocus()
-            R.id.notification_icon -> playButton.requestFocus()
-            R.id.profile_pic -> playButton.requestFocus()
-//            R.id.tab2 -> {
-//                // Find the EpisodeFragment and request focus on its first focusable item
-//                val episodeFragment = supportFragmentManager.findFragmentById(R.id.episode_fragment) as? EpisodeFragment
-//                episodeFragment?.requestFocusOnFirstItem()
-//            }
-
+            R.id.browse, R.id.search, R.id.notification_icon, R.id.profile_pic -> detailMainBinding.playButton.requestFocus()
         }
     }
-
 
     companion object {
         const val TAG = "DetailsActivity"

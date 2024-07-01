@@ -52,6 +52,8 @@ class EpisodeFragment: RowsSupportFragment() {
 
         setAdapter(adapter)
     }
+
+
     companion object{
         const val TAG = "EpisodeFragment"
     }

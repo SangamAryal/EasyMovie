@@ -20,9 +20,10 @@ import com.example.easymovie.databinding.DetailMainBinding
 import com.example.easymovie.databinding.LeftDetailBinding
 import com.example.easymovie.databinding.RightDetailBinding
 import com.example.easymovie.databinding.TopBarBinding
+import com.example.easymovie.ui.fragments.tabs.TabFragment
 import com.example.easymovie.utils.Constants.IMAGE_BASE_URL
 
-class DetailsActivity : FragmentActivity() {
+class DetailsActivity : FragmentActivity(), TabFragment.OverviewFocusCallback {
 
     private var mSelectedMovie: Result? = null
 
@@ -30,6 +31,8 @@ class DetailsActivity : FragmentActivity() {
     private lateinit var topBarBinding: TopBarBinding
     private lateinit var leftDetailBinding: LeftDetailBinding
     private lateinit var rightDetailBinding: RightDetailBinding
+
+    private var overviewRowView: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +82,11 @@ class DetailsActivity : FragmentActivity() {
         topBarBinding.browse.requestFocus()
     }
 
+    override fun onOverviewFocusView(view: View) {
+        overviewRowView = view
+        setFocusListener(view)
+    }
+
     private fun setupTabs() {
         val tabs = listOf(
             rightDetailBinding.tab1 to 1,
@@ -112,6 +120,9 @@ class DetailsActivity : FragmentActivity() {
 
     private fun loadFragment(fragment: Fragment) {
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        if (fragment is TabFragment) {
+            fragment.setOverviewFocusCallback(this)
+        }
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()
     }
@@ -200,14 +211,22 @@ class DetailsActivity : FragmentActivity() {
     }
 
     private fun handleDpadUp(focusedView: View?) {
-        when (focusedView?.id) {
-            R.id.play_button -> topBarBinding.browse.requestFocus()
-            R.id.tab1, R.id.tab2, R.id.tab3, R.id.tab4 -> topBarBinding.profilePic.requestFocus()
+        when (focusedView) {
+            overviewRowView -> {
+                detailMainBinding.playButton.requestFocus()
+            }
+            rightDetailBinding.tab1 -> topBarBinding.browse.requestFocus()
+            rightDetailBinding.tab2 -> rightDetailBinding.tab1.requestFocus()
+            rightDetailBinding.tab3 -> rightDetailBinding.tab2.requestFocus()
+            rightDetailBinding.tab4 -> rightDetailBinding.tab3.requestFocus()
+            else -> topBarBinding.profilePic.requestFocus()
         }
     }
 
     private fun handleDpadDown(focusedView: View?) {
         when (focusedView?.id) {
+            R.id.tab1 -> overviewRowView?.requestFocus()
+
             R.id.browse, R.id.search, R.id.notification_icon, R.id.profile_pic -> detailMainBinding.playButton.requestFocus()
         }
     }
@@ -218,3 +237,5 @@ class DetailsActivity : FragmentActivity() {
         const val MOVIE = "Movie"
     }
 }
+
+

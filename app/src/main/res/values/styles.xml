@@ -59,7 +59,6 @@
     </style>
 
 
-
     <style name="MySeekBar">
         <item name="android:progressBackgroundTint">@color/lb_playback_progress_primary_color</item>
         <item name="android:progressTint">@color/progressTint</item>
@@ -71,10 +70,41 @@
         <item name="android:focusableInTouchMode">true</item>
         <item name="android:textFontWeight" tools:targetApi="p">700</item>
         <item name="android:textSize">13sp</item>
-        <item name ="android:drawableBottom">@drawable/tab_bar</item>
+        <item name="android:drawableBottom">@drawable/tab_bar</item>
         <item name="android:textColor">@color/bar</item>
 
     </style>
+
+    <style name="Widget.Leanback.Row.HorizontalGridView" tools:override="true">
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:paddingStart">?attr/browsePaddingStart</item>
+        <item name="android:paddingEnd">?attr/browsePaddingEnd</item>
+        <item name="android:paddingBottom">@dimen/lb_browse_item_vertical_spacing</item>
+        <item name="android:paddingTop">@dimen/lb_browse_item_vertical_spacing</item>
+        <item name="android:horizontalSpacing">@dimen/lb_browse_item_horizontal_spacing</item>
+        <item name="android:verticalSpacing">@dimen/lb_browse_item_vertical_spacing</item>
+        <item name="focusOutFront">true</item>
+        <item name="focusOutEnd">true</item>
+        <item name="focusOutSideStart">true</item>
+        <item name="focusOutSideEnd">true</item>
+    </style>
+
+    <style name="Widget.Leanback.Row.VerticalGridView" tools:override="true">
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:paddingStart" >?attr/browsePaddingStart</item>
+        <item name="android:paddingEnd">?attr/browsePaddingEnd</item>
+        <item name="android:paddingBottom">@dimen/lb_browse_item_vertical_spacing</item>
+        <item name="android:paddingTop">@dimen/lb_browse_item_vertical_spacing</item>
+        <item name="android:horizontalSpacing">@dimen/lb_browse_item_horizontal_spacing</item>
+        <item name="android:verticalSpacing">@dimen/lb_browse_item_vertical_spacing</item>
+        <item name="focusOutFront">true</item>
+        <item name="focusOutEnd">true</item>
+        <item name="focusOutSideStart">true</item>
+        <item name="focusOutSideEnd">true</item>
+    </style>
+
 
 
 </resources>

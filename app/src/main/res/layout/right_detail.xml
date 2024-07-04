@@ -7,7 +7,8 @@
     android:layout_marginStart="0dp"
     android:background="@color/details_background"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:paddingTop="16dp"
+    android:paddingHorizontal="16dp">
 
     <!-- Title and Info Section -->
     <LinearLayout

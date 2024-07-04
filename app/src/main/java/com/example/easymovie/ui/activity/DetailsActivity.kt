@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.ImageView
@@ -20,6 +21,7 @@ import com.example.easymovie.databinding.DetailMainBinding
 import com.example.easymovie.databinding.LeftDetailBinding
 import com.example.easymovie.databinding.RightDetailBinding
 import com.example.easymovie.databinding.TopBarBinding
+import com.example.easymovie.ui.fragments.tabs.EpisodeFragment
 import com.example.easymovie.ui.fragments.tabs.TabFragment
 import com.example.easymovie.utils.Constants.IMAGE_BASE_URL
 
@@ -33,14 +35,12 @@ class DetailsActivity : FragmentActivity(), TabFragment.OverviewFocusCallback {
     private lateinit var rightDetailBinding: RightDetailBinding
 
     private var overviewRowView: View? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         detailMainBinding = DetailMainBinding.inflate(layoutInflater)
         setContentView(detailMainBinding.root)
 
-        // Initialize bindings for included layouts
         topBarBinding = TopBarBinding.bind(detailMainBinding.root.findViewById(R.id.topp_bar))
         leftDetailBinding =
             LeftDetailBinding.bind(detailMainBinding.root.findViewById(R.id.left_part))
@@ -78,6 +78,49 @@ class DetailsActivity : FragmentActivity(), TabFragment.OverviewFocusCallback {
         setFocusListener(topBarBinding.search)
         setFocusListener(topBarBinding.notificationIcon)
         setFocusListener(topBarBinding.profilePic)
+
+        // Set key listeners
+        setOnKeyListenerForView(
+            topBarBinding.browse, leftTargetId = null, rightTargetId = R.id.search,
+            upTargetId = null, downTargetId = R.id.play_button
+        )
+        setOnKeyListenerForView(
+            topBarBinding.search, leftTargetId = R.id.browse, rightTargetId = R.id.notification_icon,
+            upTargetId = null, downTargetId = R.id.play_button
+        )
+        setOnKeyListenerForView(
+            topBarBinding.notificationIcon, leftTargetId = R.id.search, rightTargetId = R.id.profile_pic,
+            upTargetId = null, downTargetId = R.id.play_button
+        )
+        setOnKeyListenerForView(
+            topBarBinding.profilePic, leftTargetId = R.id.notification_icon, rightTargetId = null,
+            upTargetId = null, downTargetId = R.id.play_button
+        )
+        setOnKeyListenerForView(
+            rightDetailBinding.tab1, leftTargetId = R.id.play_button, rightTargetId = R.id.tab2,
+            upTargetId = R.id.profile_pic, downTargetId = R.id.episode_fragment
+        )
+        try {
+            setOnKeyListenerForView(
+                rightDetailBinding.tab2, leftTargetId = R.id.tab1, rightTargetId = R.id.tab3,
+                upTargetId = R.id.profile_pic, downTargetId =R.id.fragment_container
+            )
+        } catch (e: Exception) {
+            Log.d(TAG, "tab2 is error is $e")
+        }
+        setOnKeyListenerForView(
+            rightDetailBinding.tab3, leftTargetId = R.id.tab2, rightTargetId = R.id.tab4,
+            upTargetId = R.id.profile_pic, downTargetId = R.id.episode_fragment
+        )
+        setOnKeyListenerForView(
+            rightDetailBinding.tab4, leftTargetId = R.id.tab3, rightTargetId = null,
+            upTargetId = R.id.profile_pic, downTargetId = R.id.episode_fragment
+        )
+        setOnKeyListenerForView(
+            detailMainBinding.playButton, leftTargetId = null, rightTargetId = R.id.tab1,
+            upTargetId = R.id.search, downTargetId = null
+        )
+
 
         topBarBinding.browse.requestFocus()
     }
@@ -159,77 +202,42 @@ class DetailsActivity : FragmentActivity(), TabFragment.OverviewFocusCallback {
         }
     }
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        val focusedView = currentFocus
-        return when (keyCode) {
-            KeyEvent.KEYCODE_DPAD_LEFT -> {
-                handleDpadLeft(focusedView)
-                true
+    private fun setOnKeyListenerForView(
+        view: View,
+        rightTargetId: Int? = null,
+        leftTargetId: Int? = null,
+        upTargetId: Int? = null,
+        downTargetId: Int? = null
+    ) {
+        view.setOnKeyListener { _, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN) {
+                when (keyCode) {
+                    KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                        rightTargetId?.let { findViewById<View>(it).requestFocus() }
+                        true
+                    }
+                    KeyEvent.KEYCODE_DPAD_LEFT -> {
+                        leftTargetId?.let { findViewById<View>(it).requestFocus() }
+                        true
+                    }
+                    KeyEvent.KEYCODE_DPAD_UP -> {
+                        upTargetId?.let { findViewById<View>(it).requestFocus() }
+                        true
+                    }
+                    KeyEvent.KEYCODE_DPAD_DOWN -> {
+                        downTargetId?.let { findViewById<View>(it).requestFocus() }
+                        true
+                    }
+                    else -> false
+                }
+            } else {
+                false
             }
-
-            KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                handleDpadRight(focusedView)
-                true
-            }
-
-            KeyEvent.KEYCODE_DPAD_UP -> {
-                handleDpadUp(focusedView)
-                true
-            }
-
-            KeyEvent.KEYCODE_DPAD_DOWN -> {
-                handleDpadDown(focusedView)
-                true
-            }
-
-            else -> super.onKeyDown(keyCode, event)
         }
     }
 
-    private fun handleDpadLeft(focusedView: View?) {
-        when (focusedView?.id) {
-            R.id.search -> topBarBinding.browse.requestFocus()
-            R.id.notification_icon -> topBarBinding.search.requestFocus()
-            R.id.profile_pic -> topBarBinding.notificationIcon.requestFocus()
-            R.id.tab1 -> detailMainBinding.playButton.requestFocus()
-            R.id.tab2 -> rightDetailBinding.tab1.requestFocus()
-            R.id.tab3 -> rightDetailBinding.tab2.requestFocus()
-            R.id.tab4 -> rightDetailBinding.tab3.requestFocus()
-        }
-    }
 
-    private fun handleDpadRight(focusedView: View?) {
-        when (focusedView?.id) {
-            R.id.browse -> topBarBinding.search.requestFocus()
-            R.id.search -> topBarBinding.notificationIcon.requestFocus()
-            R.id.notification_icon -> topBarBinding.profilePic.requestFocus()
-            R.id.play_button -> rightDetailBinding.tab1.requestFocus()
-            R.id.tab1 -> rightDetailBinding.tab2.requestFocus()
-            R.id.tab2 -> rightDetailBinding.tab3.requestFocus()
-            R.id.tab3 -> rightDetailBinding.tab4.requestFocus()
-        }
-    }
 
-    private fun handleDpadUp(focusedView: View?) {
-        when (focusedView) {
-            overviewRowView -> {
-                detailMainBinding.playButton.requestFocus()
-            }
-            rightDetailBinding.tab1 -> topBarBinding.browse.requestFocus()
-            rightDetailBinding.tab2 -> rightDetailBinding.tab1.requestFocus()
-            rightDetailBinding.tab3 -> rightDetailBinding.tab2.requestFocus()
-            rightDetailBinding.tab4 -> rightDetailBinding.tab3.requestFocus()
-            else -> topBarBinding.profilePic.requestFocus()
-        }
-    }
-
-    private fun handleDpadDown(focusedView: View?) {
-        when (focusedView?.id) {
-            R.id.tab1 -> overviewRowView?.requestFocus()
-
-            R.id.browse, R.id.search, R.id.notification_icon, R.id.profile_pic -> detailMainBinding.playButton.requestFocus()
-        }
-    }
 
     companion object {
         const val TAG = "DetailsActivity"
@@ -237,5 +245,3 @@ class DetailsActivity : FragmentActivity(), TabFragment.OverviewFocusCallback {
         const val MOVIE = "Movie"
     }
 }
-
-

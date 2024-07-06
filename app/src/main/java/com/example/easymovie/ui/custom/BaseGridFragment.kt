@@ -1,7 +1,9 @@
 package com.example.easymovie.ui.custom
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.leanback.app.VerticalGridSupportFragment
@@ -21,6 +23,13 @@ abstract class BaseGridFragment : Fragment() {
                         androidx.leanback.R.id.grid_frame
                     ) as? BrowseFrameLayout
                     browseFrameLayout?.onFocusSearchListener = null
+                    browseFrameLayout?.let{
+//                        it.descendantFocusability = ViewGroup.FOCUSABLE_AUTO
+                        it.viewTreeObserver.addOnGlobalFocusChangeListener { oldFocus, newFocus ->
+                            Log.d("VGridSupportFragment", "Focus changed from $oldFocus to $newFocus")
+                        }
+                    }
+
                 }
             }
         }

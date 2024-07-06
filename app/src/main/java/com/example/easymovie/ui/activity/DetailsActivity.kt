@@ -25,9 +25,10 @@ import com.example.easymovie.ui.fragments.tabs.EpisodeFragment
 import com.example.easymovie.ui.fragments.tabs.TabFragment
 import com.example.easymovie.utils.Constants.IMAGE_BASE_URL
 
-class DetailsActivity : FragmentActivity(), TabFragment.OverviewFocusCallback {
+class DetailsActivity : FragmentActivity(){
 
     private var mSelectedMovie: Result? = null
+    private var lastFocusedTab: View? = null
 
     private lateinit var detailMainBinding: DetailMainBinding
     private lateinit var topBarBinding: TopBarBinding
@@ -120,15 +121,20 @@ class DetailsActivity : FragmentActivity(), TabFragment.OverviewFocusCallback {
             detailMainBinding.playButton, leftTargetId = null, rightTargetId = R.id.tab1,
             upTargetId = R.id.search, downTargetId = null
         )
+        setOnKeyListenerForView(
+            rightDetailBinding.fragmentContainer, leftTargetId = null, rightTargetId =null,
+            upTargetId = R.id.tab1, downTargetId = null
+        )
 
 
         topBarBinding.browse.requestFocus()
     }
 
-    override fun onOverviewFocusView(view: View) {
-        overviewRowView = view
-        setFocusListener(view)
+    fun getLastFocusedView(): View? {
+        return lastFocusedTab
     }
+
+
 
     private fun setupTabs() {
         val tabs = listOf(
@@ -144,6 +150,7 @@ class DetailsActivity : FragmentActivity(), TabFragment.OverviewFocusCallback {
             }
             tab.setOnFocusChangeListener { v, hasFocus ->
                 if (hasFocus) {
+                    lastFocusedTab = v
                     v.elevation = 8.0f
                     if (v is TextView) {
                         v.setTypeface(null, Typeface.BOLD)
@@ -163,9 +170,6 @@ class DetailsActivity : FragmentActivity(), TabFragment.OverviewFocusCallback {
 
     private fun loadFragment(fragment: Fragment) {
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-        if (fragment is TabFragment) {
-            fragment.setOverviewFocusCallback(this)
-        }
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()
     }
@@ -193,6 +197,8 @@ class DetailsActivity : FragmentActivity(), TabFragment.OverviewFocusCallback {
             }
         }
     }
+
+
 
     private fun changeDrawableColor(textView: TextView, colorResId: Int) {
         for (drawable in textView.compoundDrawables) {

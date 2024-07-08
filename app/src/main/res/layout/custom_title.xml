@@ -4,32 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.leanback.widget.TitleView
-        android:id="@+id/leanback_title_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/title_tv"
+    <ImageView
+        android:id="@+id/title_badge"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:textSize="30sp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginTop="0dp"
         android:layout_gravity="end"
-        android:textColor="@color/white_color"
-        android:visibility="visible"
-        tools:text="@string/app_name"
-        android:drawableEnd="@drawable/analog_clock"
+        android:layout_marginEnd="10dp"
+        android:contentDescription="@string/app_name"
+        android:src="@null"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
         android:drawablePadding="10dp"
-        tools:ignore="UseCompatTextViewDrawableXml" />
+        android:textColor="@color/white_color"
+        android:textSize="30sp"
+        android:visibility="visible"
+        android:drawableEnd="@drawable/analog_clock"
+        tools:ignore="UseCompatTextViewDrawableXml"
+        tools:text="@string/app_name" />
 
     <androidx.leanback.widget.SearchOrbView
         android:id="@+id/title_orb"
-        android:layout_height="40dp"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:transitionGroup="true"
-        tools:ignore="UnusedAttribute"
-        android:layout_gravity="start"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        tools:ignore="UnusedAttribute" />
 </merge>

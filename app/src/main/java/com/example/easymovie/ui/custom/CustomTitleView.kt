@@ -26,8 +26,8 @@ class CustomTitleView @JvmOverloads constructor(
 
     init {
         LayoutInflater.from(context).inflate(R.layout.custom_title, this, true)
-        mBadgeView = findViewById(androidx.leanback.R.id.title_badge)
-        mTextView = findViewById(R.id.title_tv)
+        mBadgeView = findViewById(R.id.title_badge)
+        mTextView = findViewById(R.id.title_text)
         mSearchOrbView = findViewById(R.id.title_orb)
 
         clipToPadding = false

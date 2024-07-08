@@ -27,10 +27,10 @@ class GridShowFragment : VerticalGridSupportFragment(), BrowseSupportFragment.Ma
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val gridPresenter = VerticalGridPresenter().apply {
             numberOfColumns = 4
         }
+
         setGridPresenter(gridPresenter)
 
         // Initialize the adapter

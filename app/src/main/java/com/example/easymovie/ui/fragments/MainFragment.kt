@@ -76,6 +76,7 @@ class MainFragment : BrowseSupportFragment() {
     private fun setupUIElements() {
         title = getString(R.string.browse_title)
         headersState = HEADERS_ENABLED
+        badgeDrawable = null
         isHeadersTransitionOnBackEnabled = true
         brandColor = ContextCompat.getColor(requireActivity(), R.color.fastlane_background)
         searchAffordanceColor = ContextCompat.getColor(requireActivity(), R.color.search_opaque)

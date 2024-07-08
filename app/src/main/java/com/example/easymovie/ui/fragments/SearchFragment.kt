@@ -125,10 +125,10 @@ class SearchFragment : SearchSupportFragment(), SearchSupportFragment.SearchResu
                 val intent = Intent(activity!!, DetailsActivity::class.java)
                 intent.putExtra(DetailsActivity.MOVIE, item as Serializable)
 
-                val bundle = (itemViewHolder?.view as ImageCardView).mainImageView?.let {
+                val bundle = (itemViewHolder?.view).let {
                     ActivityOptionsCompat.makeSceneTransitionAnimation(
                         activity!!,
-                        it,
+                        it!!,
                         DetailsActivity.SHARED_ELEMENT_NAME
                     ).toBundle()
                 }

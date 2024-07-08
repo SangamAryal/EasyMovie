@@ -12,14 +12,11 @@ import androidx.leanback.app.BrowseSupportFragment
 import androidx.leanback.app.HeadersSupportFragment
 import androidx.leanback.widget.ArrayObjectAdapter
 import androidx.leanback.widget.ClassPresenterSelector
-import androidx.leanback.widget.HeaderItem
-import androidx.leanback.widget.ListRow
 import androidx.leanback.widget.ListRowPresenter
 import androidx.leanback.widget.PageRow
 import androidx.leanback.widget.Row
 import com.example.easymovie.R
 import com.example.easymovie.ui.activity.SearchActivity
-import com.example.easymovie.ui.custom.CustomTitleView
 import com.example.easymovie.ui.custom.menu.CustomRowPresenter
 import com.example.easymovie.ui.custom.menu.MenuItem
 import com.example.easymovie.ui.page.PageRowFragmentFactory

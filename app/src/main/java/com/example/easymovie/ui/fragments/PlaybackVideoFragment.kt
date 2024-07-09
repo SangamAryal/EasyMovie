@@ -52,8 +52,6 @@ class PlaybackVideoFragment : VideoSupportFragment() {
         // Set the seek provider to the transport control glue
         mTransportControlGlue.seekProvider = seekDataProvider
 
-
-
         Log.d("PlaybackVideoFragment", "Initializing player")
         mTransportControlGlue.playWhenPrepared()
         mTransportControlGlue.isSeekEnabled = false

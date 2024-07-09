@@ -70,9 +70,8 @@
         <item name="android:focusableInTouchMode">true</item>
         <item name="android:textFontWeight" tools:targetApi="p">700</item>
         <item name="android:textSize">13sp</item>
-        <item name="android:drawableBottom">@drawable/tab_bar</item>
+        <item name="android:background">@drawable/tab_bar</item>
         <item name="android:textColor">@color/bar</item>
-
     </style>
 
     <style name="Widget.Leanback.Row.HorizontalGridView" tools:override="true">

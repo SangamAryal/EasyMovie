@@ -228,6 +228,11 @@ class MovieDetailsFragment : DetailsSupportFragment() {
 
         val header = HeaderItem(1, "Cast & Crew")
         mAdapter.add(ListRow(header, castCrewAdapter))
+        val customListRowPresenter = object : ListRowPresenter() {
+            override fun isUsingDefaultListSelectEffect() = false
+        }.apply {
+            shadowEnabled = false
+        }
         mPresenterSelector.addClassPresenter(ListRow::class.java, ListRowPresenter())
     }
 

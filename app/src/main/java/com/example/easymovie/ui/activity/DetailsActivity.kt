@@ -29,13 +29,13 @@ class DetailsActivity : FragmentActivity(){
 
     private var mSelectedMovie: Result? = null
     private var lastFocusedTab: View? = null
+    private var lastSelectedTabIndex: Int = 0
 
     private lateinit var detailMainBinding: DetailMainBinding
     private lateinit var topBarBinding: TopBarBinding
     private lateinit var leftDetailBinding: LeftDetailBinding
     private lateinit var rightDetailBinding: RightDetailBinding
 
-    private var overviewRowView: View? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -126,6 +126,12 @@ class DetailsActivity : FragmentActivity(){
             upTargetId = R.id.tab1, downTargetId = null
         )
 
+        detailMainBinding.playButton.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                lastSelectedTabIndex = 0
+            }
+        }
+
 
         topBarBinding.browse.requestFocus()
     }
@@ -146,7 +152,8 @@ class DetailsActivity : FragmentActivity(){
 
         for ((tab, index) in tabs) {
             tab.setOnClickListener {
-                loadFragment(PageFragment.newInstance(index))
+                loadFragment(PageFragment.newInstance(index), index > lastSelectedTabIndex)
+                lastSelectedTabIndex = index
             }
             tab.setOnFocusChangeListener { v, hasFocus ->
                 if (hasFocus) {
@@ -155,7 +162,8 @@ class DetailsActivity : FragmentActivity(){
                     if (v is TextView) {
                         v.setTypeface(null, Typeface.BOLD)
                         v.setTextColor(Color.WHITE)
-                        loadFragment(PageFragment.newInstance(index))
+                        loadFragment(PageFragment.newInstance(index), index > lastSelectedTabIndex)
+                        lastSelectedTabIndex = index
                     }
                 } else {
                     v.elevation = 0f
@@ -167,9 +175,24 @@ class DetailsActivity : FragmentActivity(){
             }
         }
     }
-
-    private fun loadFragment(fragment: Fragment) {
+    private fun loadFragment(fragment: Fragment, isForward: Boolean=true) {
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        if (isForward) {
+            transaction.setCustomAnimations(
+                R.anim.slide_in_right,  // enter animation
+                R.anim.slide_out_left,  // exit animation
+                R.anim.slide_in_left,   // pop enter animation
+                R.anim.slide_out_right  // pop exit animation
+            )
+        } else {
+            transaction.setCustomAnimations(
+                R.anim.slide_in_left,
+                R.anim.slide_out_right,
+                R.anim.slide_in_right,
+                R.anim.slide_out_left
+            )
+        }
+
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()
     }
